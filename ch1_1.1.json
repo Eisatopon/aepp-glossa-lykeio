@@ -1,0 +1,358 @@
+{
+  "id": "ch1_1.1",
+  "chapter": "ch1",
+  "chapter_title": "Βασικές Έννοιες Αλγορίθμων",
+  "section": "1.1",
+  "section_title": "Δεδομένα - Πληροφορία - Αλγόριθμοι",
+  "book": "ΒΙΒΛΙΟ 1",
+  "metadata": {
+    "created_at": "2026-05-07",
+    "version": "2.1",
+    "exam_mode": true,
+    "estimated_minutes": 35,
+    "total_questions": 25
+  },
+  "questions": [
+    {
+      "id": "AEPP_CH1_001",
+      "type": "true_false",
+      "difficulty": "easy",
+      "points": 1,
+      "tags": ["δεδομένα", "πληροφορία"],
+      "learning_objective": "Διάκριση δεδομένων και πληροφορίας",
+      "question": "Η πληροφορία προκύπτει από την επεξεργασία δεδομένων.",
+      "correct_answer": true,
+      "explanation": "Η πληροφορία είναι το αποτέλεσμα της επεξεργασίας και οργάνωσης των δεδομένων, ώστε να έχει νόημα για τον χρήστη."
+    },
+    {
+      "id": "AEPP_CH1_002",
+      "type": "true_false",
+      "difficulty": "easy",
+      "points": 1,
+      "tags": ["δεδομένα"],
+      "learning_objective": "Ρόλος των δεδομένων",
+      "question": "Τα δεδομένα αποτελούν την πρώτη ύλη της επεξεργασίας.",
+      "correct_answer": true,
+      "explanation": "Τα δεδομένα είναι η ακατέργαστη πρώτη ύλη που εισάγεται στον υπολογιστή."
+    },
+    {
+      "id": "AEPP_CH1_003",
+      "type": "true_false",
+      "difficulty": "medium",
+      "points": 1,
+      "tags": ["αλγόριθμος", "περατότητα"],
+      "learning_objective": "Χαρακτηριστικά αλγορίθμου",
+      "question": "Ένας αλγόριθμος μπορεί να εκτελείται επ' άπειρον και να θεωρείται σωστός.",
+      "correct_answer": false,
+      "explanation": "Η περατότητα είναι βασικό χαρακτηριστικό κάθε αλγορίθμου. Πρέπει να τερματίζει μετά από πεπερασμένο αριθμό βημάτων."
+    },
+    {
+      "id": "AEPP_CH1_004",
+      "type": "true_false",
+      "difficulty": "medium",
+      "points": 1,
+      "tags": ["καθοριστικότητα"],
+      "learning_objective": "Καθοριστικότητα αλγορίθμου",
+      "question": "Οι εντολές ενός αλγορίθμου πρέπει να είναι σαφείς.",
+      "correct_answer": true,
+      "explanation": "Η καθοριστικότητα απαιτεί κάθε εντολή να είναι σαφής και χωρίς διφορούμενες ερμηνείες."
+    },
+    {
+      "id": "AEPP_CH1_005",
+      "type": "true_false",
+      "difficulty": "easy",
+      "points": 1,
+      "tags": ["αλγόριθμος"],
+      "learning_objective": "Χαρακτηριστικά αλγορίθμου",
+      "question": "Κάθε αλγόριθμος πρέπει να διαθέτει τουλάχιστον μία έξοδο.",
+      "correct_answer": true,
+      "explanation": "Ο αλγόριθμος πρέπει να παράγει κάποιο αποτέλεσμα."
+    },
+    {
+      "id": "AEPP_CH1_006",
+      "type": "true_false",
+      "difficulty": "medium",
+      "points": 1,
+      "tags": ["αποτελεσματικότητα"],
+      "learning_objective": "Αποτελεσματικότητα αλγορίθμου",
+      "question": "Η αποτελεσματικότητα σχετίζεται με την πρακτική δυνατότητα επίλυσης προβλήματος.",
+      "correct_answer": true,
+      "explanation": "Ο αλγόριθμος πρέπει να είναι πρακτικά εφαρμόσιμος."
+    },
+    {
+      "id": "AEPP_CH1_007",
+      "type": "true_false",
+      "difficulty": "hard",
+      "points": 1,
+      "tags": ["καθοριστικότητα"],
+      "learning_objective": "Καθοριστικότητα αλγορίθμου",
+      "question": "Η ασάφεια επιτρέπεται σε έναν αλγόριθμο.",
+      "correct_answer": false,
+      "explanation": "Η ασάφεια παραβιάζει το χαρακτηριστικό της καθοριστικότητας."
+    },
+    {
+      "id": "AEPP_CH1_008",
+      "type": "true_false",
+      "difficulty": "easy",
+      "points": 1,
+      "tags": ["τύποι_δεδομένων"],
+      "learning_objective": "Λογικά δεδομένα",
+      "question": "Τα λογικά δεδομένα έχουν μόνο δύο δυνατές τιμές.",
+      "correct_answer": true,
+      "explanation": "Οι λογικές τιμές είναι ΑΛΗΘΗΣ και ΨΕΥΔΗΣ."
+    },
+    {
+      "id": "AEPP_CH1_009",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "points": 1,
+      "tags": ["καθοριστικότητα"],
+      "learning_objective": "Χαρακτηριστικά αλγορίθμου",
+      "question": "Ποιο χαρακτηριστικό αλγορίθμου εξασφαλίζει σαφείς εντολές;",
+      "options": [
+        { "id": "A", "text": "Αποτελεσματικότητα" },
+        { "id": "B", "text": "Καθοριστικότητα" },
+        { "id": "C", "text": "Περατότητα" },
+        { "id": "D", "text": "Έξοδος" }
+      ],
+      "correct_answer": "B",
+      "explanation": "Η καθοριστικότητα απαιτεί σαφείς και ακριβείς εντολές."
+    },
+    {
+      "id": "AEPP_CH1_010",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "points": 1,
+      "tags": ["τύποι_δεδομένων"],
+      "learning_objective": "Λογικά δεδομένα",
+      "question": "Ποιο από τα παρακάτω αποτελεί λογικό δεδομένο;",
+      "options": [
+        { "id": "A", "text": "'ΑΕΠΠ'" },
+        { "id": "B", "text": "25" },
+        { "id": "C", "text": "ΑΛΗΘΗΣ" },
+        { "id": "D", "text": "3.14" }
+      ],
+      "correct_answer": "C",
+      "explanation": "Το ΑΛΗΘΗΣ είναι λογικό δεδομένο."
+    },
+    {
+      "id": "AEPP_CH1_011",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "points": 2,
+      "tags": ["επίλυση_προβλήματος"],
+      "learning_objective": "Στάδια επίλυσης προβλήματος",
+      "question": "Ποιο από τα παρακάτω αποτελεί στάδιο επίλυσης προβλήματος;",
+      "options": [
+        { "id": "A", "text": "Κατανόηση προβλήματος" },
+        { "id": "B", "text": "Τυχαία εκτέλεση" },
+        { "id": "C", "text": "Παράλειψη ελέγχου" },
+        { "id": "D", "text": "Αποφυγή ανάλυσης" }
+      ],
+      "correct_answer": "A",
+      "explanation": "Η κατανόηση του προβλήματος είναι το πρώτο και βασικότερο στάδιο."
+    },
+    {
+      "id": "AEPP_CH1_012",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "points": 2,
+      "tags": ["περατότητα"],
+      "learning_objective": "Χαρακτηριστικά αλγορίθμου",
+      "question": "Ποιο χαρακτηριστικό σχετίζεται με τον πεπερασμένο αριθμό βημάτων;",
+      "options": [
+        { "id": "A", "text": "Καθοριστικότητα" },
+        { "id": "B", "text": "Είσοδος" },
+        { "id": "C", "text": "Περατότητα" },
+        { "id": "D", "text": "Έξοδος" }
+      ],
+      "correct_answer": "C",
+      "explanation": "Η περατότητα απαιτεί ο αλγόριθμος να τερματίζει μετά από πεπερασμένα βήματα."
+    },
+    {
+      "id": "AEPP_CH1_013",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "points": 2,
+      "tags": ["τύποι_δεδομένων"],
+      "learning_objective": "Αλφαριθμητικά δεδομένα",
+      "question": "Ποιο από τα παρακάτω αποτελεί αλφαριθμητικό δεδομένο;",
+      "options": [
+        { "id": "A", "text": "'ΠΑΝΕΛΛΑΔΙΚΕΣ'" },
+        { "id": "B", "text": "125" },
+        { "id": "C", "text": "ΑΛΗΘΗΣ" },
+        { "id": "D", "text": "12.8" }
+      ],
+      "correct_answer": "A",
+      "explanation": "Τα αλφαριθμητικά (string) περικλείονται σε εισαγωγικά."
+    },
+    {
+      "id": "AEPP_CH1_014",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "points": 2,
+      "tags": ["αποτελεσματικότητα"],
+      "learning_objective": "Αποτελεσματικότητα αλγορίθμου",
+      "question": "Η δυνατότητα επίλυσης προβλήματος με πρακτικό τρόπο σχετίζεται με:",
+      "options": [
+        { "id": "A", "text": "Την αποτελεσματικότητα" },
+        { "id": "B", "text": "Την είσοδο" },
+        { "id": "C", "text": "Την έξοδο" },
+        { "id": "D", "text": "Την ασάφεια" }
+      ],
+      "correct_answer": "A",
+      "explanation": "Η αποτελεσματικότητα αφορά την πρακτική εφαρμοσιμότητα."
+    },
+    {
+      "id": "AEPP_CH1_015",
+      "type": "single_choice",
+      "difficulty": "hard",
+      "points": 2,
+      "tags": ["αλγόριθμος"],
+      "learning_objective": "Χαρακτηριστικά αλγορίθμου",
+      "question": "Ποιο από τα παρακάτω ΔΕΝ αποτελεί χαρακτηριστικό αλγορίθμου;",
+      "options": [
+        { "id": "A", "text": "Καθοριστικότητα" },
+        { "id": "B", "text": "Περατότητα" },
+        { "id": "C", "text": "Ασάφεια" },
+        { "id": "D", "text": "Αποτελεσματικότητα" }
+      ],
+      "correct_answer": "C",
+      "explanation": "Η ασάφεια δεν επιτρέπεται σε αλγόριθμο."
+    },
+    {
+      "id": "AEPP_CH1_016",
+      "type": "fill_blank",
+      "difficulty": "medium",
+      "points": 2,
+      "tags": ["πληροφορία"],
+      "learning_objective": "Διάκριση δεδομένων - πληροφορίας",
+      "question": "Η _________ είναι αποτέλεσμα επεξεργασίας δεδομένων.",
+      "correct_answer": "πληροφορία",
+      "explanation": "Η πληροφορία προκύπτει μετά από επεξεργασία δεδομένων."
+    },
+    {
+      "id": "AEPP_CH1_017",
+      "type": "fill_blank",
+      "difficulty": "medium",
+      "points": 2,
+      "tags": ["περατότητα"],
+      "learning_objective": "Χαρακτηριστικά αλγορίθμου",
+      "question": "Η _________ απαιτεί ο αλγόριθμος να ολοκληρώνεται μετά από πεπερασμένο αριθμό βημάτων.",
+      "correct_answer": "περατότητα",
+      "explanation": "Η περατότητα είναι βασικό χαρακτηριστικό αλγορίθμου."
+    },
+    {
+      "id": "AEPP_CH1_018",
+      "type": "fill_blank",
+      "difficulty": "hard",
+      "points": 2,
+      "tags": ["καθοριστικότητα"],
+      "learning_objective": "Καθοριστικότητα αλγορίθμου",
+      "question": "Η _________ απαιτεί κάθε εντολή να είναι σαφής και ακριβής.",
+      "correct_answer": "καθοριστικότητα",
+      "explanation": "Η καθοριστικότητα σχετίζεται με σαφείς εντολές."
+    },
+    {
+      "id": "AEPP_CH1_019",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "points": 2,
+      "tags": ["τύποι_δεδομένων"],
+      "learning_objective": "Αριθμητικά δεδομένα",
+      "question": "Ποιο από τα παρακάτω αποτελεί αριθμητικό δεδομένο;",
+      "options": [
+        { "id": "A", "text": "'125'" },
+        { "id": "B", "text": "125" },
+        { "id": "C", "text": "ΑΛΗΘΗΣ" },
+        { "id": "D", "text": "'3.14'" }
+      ],
+      "correct_answer": "B",
+      "explanation": "Οι αριθμητικές τιμές γράφονται χωρίς εισαγωγικά."
+    },
+    {
+      "id": "AEPP_CH1_020",
+      "type": "true_false",
+      "difficulty": "hard",
+      "points": 1,
+      "tags": ["αποτελεσματικότητα", "καθοριστικότητα"],
+      "learning_objective": "Διάκριση χαρακτηριστικών",
+      "question": "Η αποτελεσματικότητα σχετίζεται με τη σαφήνεια των εντολών.",
+      "correct_answer": false,
+      "explanation": "Η σαφήνεια σχετίζεται με την καθοριστικότητα, όχι με την αποτελεσματικότητα."
+    },
+    {
+      "id": "AEPP_CH1_021",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "points": 2,
+      "tags": ["είσοδος"],
+      "learning_objective": "Χαρακτηριστικά αλγορίθμου",
+      "question": "Ποιο χαρακτηριστικό αλγορίθμου αφορά τις τιμές που δίνονται πριν από την εκτέλεση;",
+      "options": [
+        { "id": "A", "text": "Έξοδος" },
+        { "id": "B", "text": "Καθοριστικότητα" },
+        { "id": "C", "text": "Είσοδος" },
+        { "id": "D", "text": "Περατότητα" }
+      ],
+      "correct_answer": "C",
+      "explanation": "Η είσοδος αφορά τα δεδομένα που λαμβάνει ο αλγόριθμος."
+    },
+    {
+      "id": "AEPP_CH1_022",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "points": 2,
+      "tags": ["έξοδος"],
+      "learning_objective": "Χαρακτηριστικά αλγορίθμου",
+      "question": "Ποιο χαρακτηριστικό αλγορίθμου αφορά τα αποτελέσματα;",
+      "options": [
+        { "id": "A", "text": "Έξοδος" },
+        { "id": "B", "text": "Είσοδος" },
+        { "id": "C", "text": "Καθοριστικότητα" },
+        { "id": "D", "text": "Περατότητα" }
+      ],
+      "correct_answer": "A",
+      "explanation": "Η έξοδος είναι το αποτέλεσμα της εκτέλεσης του αλγορίθμου."
+    },
+    {
+      "id": "AEPP_CH1_023",
+      "type": "true_false",
+      "difficulty": "medium",
+      "points": 1,
+      "tags": ["είσοδος"],
+      "learning_objective": "Χαρακτηριστικά αλγορίθμου",
+      "question": "Ένας αλγόριθμος μπορεί να μην έχει είσοδο.",
+      "correct_answer": true,
+      "explanation": "Υπάρχουν αλγόριθμοι που δεν χρειάζονται δεδομένα εισόδου (π.χ. εκτύπωση σταθερού μηνύματος)."
+    },
+    {
+      "id": "AEPP_CH1_024",
+      "type": "true_false",
+      "difficulty": "hard",
+      "points": 1,
+      "tags": ["αλγόριθμος"],
+      "learning_objective": "Επίλυση προβλημάτων",
+      "question": "Κάθε πρόβλημα επιλύεται αποκλειστικά με έναν αλγόριθμο.",
+      "correct_answer": false,
+      "explanation": "Ένα πρόβλημα μπορεί να έχει πολλαπλές σωστές αλγοριθμικές λύσεις."
+    },
+    {
+      "id": "AEPP_CH1_025",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "points": 2,
+      "tags": ["επίλυση_προβλήματος"],
+      "learning_objective": "Στάδια επίλυσης προβλήματος",
+      "question": "Ποιο από τα παρακάτω ΔΕΝ αποτελεί στάδιο επίλυσης προβλήματος;",
+      "options": [
+        { "id": "A", "text": "Κατανόηση" },
+        { "id": "B", "text": "Ανάλυση" },
+        { "id": "C", "text": "Τυχαία εκτέλεση" },
+        { "id": "D", "text": "Υλοποίηση" }
+      ],
+      "correct_answer": "C",
+      "explanation": "Η τυχαία εκτέλεση δεν αποτελεί συστηματικό στάδιο επίλυσης προβλήματος."
+    }
+  ]
+}
