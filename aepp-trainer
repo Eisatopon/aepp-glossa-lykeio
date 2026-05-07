@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ΑΕΠΠ Trainer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0f1f12;
+    --surface:   #162a1a;
+    --card:      #1c3322;
+    --border:    #2d6e3a;
+    --accent1:   #2d8a3e;
+    --accent2:   #1f6b2d;
+    --amber:     #c8a800;
+    --green:     #4abe65;
+    --red:       #ef4444;
+    --text:      #f0f7f1;
+    --muted:     #8ab894;
+    --mono:      'Space Mono', monospace;
+    --sans:      'Sora', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* === BACKGROUND === */
+  .bg-grid {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(45,138,62,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(45,138,62,.07) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .bg-orb {
+    position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0;
+  }
+  .orb1 { width: 500px; height: 500px; background: rgba(45,138,62,.18); top: -100px; right: -100px; }
+  .orb2 { width: 400px; height: 400px; background: rgba(31,107,45,.14); bottom: -80px; left: -80px; }
+  .orb3 { width: 300px; height: 300px; background: rgba(200,168,0,.10); top: 40%; left: 40%; }
+
+  /* === WRAPPER === */
+  #app {
+    position: relative; z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+
+  /* === HEADER === */
+  header {
+    display: flex; align-items: center; gap: 16px;
+    padding: 20px 0 32px;
+  }
+  .logo-box {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: linear-gradient(135deg, #2d8a3e, #c8a800);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-weight: 700; font-size: 14px;
+    letter-spacing: -1px; flex-shrink: 0;
+    box-shadow: 0 0 24px rgba(45,138,62,.5);
+  }
+  .header-text h1 {
+    font-size: 22px; font-weight: 700; letter-spacing: -.5px;
+    background: linear-gradient(90deg, #c8a800, #f0d000);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .header-text p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* === CONTROLS === */
+  .controls-bar {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .ctrl-btn {
+    display: flex; align-items: center; gap: 7px;
+    padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text);
+    font-family: var(--sans); font-size: 13px; cursor: pointer;
+    transition: all .2s;
+  }
+  .ctrl-btn:hover { border-color: var(--accent1); color: #c4b5fd; }
+  .ctrl-btn.active { background: rgba(124,58,237,.2); border-color: var(--accent1); color: #c4b5fd; }
+  .ctrl-btn svg { flex-shrink: 0; }
+
+  /* === PROGRESS === */
+  .progress-wrap {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px 20px; margin-bottom: 20px;
+  }
+  .progress-top {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 10px;
+  }
+  .progress-label { font-size: 13px; color: var(--muted); }
+  .progress-counter {
+    font-family: var(--mono); font-size: 13px;
+    color: #c8a800;
+  }
+  .progress-bar-bg {
+    height: 6px; background: rgba(255,255,255,.06); border-radius: 99px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, var(--accent1), #c8a800);
+    transition: width .4s cubic-bezier(.4,0,.2,1);
+  }
+  .progress-stats {
+    display: flex; gap: 16px; margin-top: 12px;
+  }
+  .stat { font-size: 12px; }
+  .stat span { font-family: var(--mono); font-weight: 700; }
+  .stat.correct span { color: var(--green); }
+  .stat.wrong span { color: var(--red); }
+  .stat.skipped span { color: var(--muted); }
+  .stat.time span { color: var(--amber); }
+
+  /* === QUESTION CARD === */
+  .q-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 18px; padding: 28px;
+    animation: slideIn .35s cubic-bezier(.4,0,.2,1);
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-meta {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px;
+  }
+  .badge {
+    font-size: 11px; font-family: var(--mono);
+    padding: 3px 9px; border-radius: 99px;
+    border: 1px solid; letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+  .badge-easy   { color: var(--green); border-color: rgba(16,185,129,.3); background: rgba(16,185,129,.08); }
+  .badge-medium { color: var(--amber); border-color: rgba(245,158,11,.3); background: rgba(245,158,11,.08); }
+  .badge-hard   { color: var(--red);   border-color: rgba(239,68,68,.3);  background: rgba(239,68,68,.08); }
+  .badge-type   { color: var(--muted); border-color: rgba(157,133,184,.2); background: transparent; }
+  .badge-pts    { color: #c8a800; border-color: rgba(200,168,0,.4); background: rgba(200,168,0,.08); }
+
+  .q-number {
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .q-text {
+    font-size: 18px; font-weight: 600; line-height: 1.5;
+    color: var(--text); margin-bottom: 24px;
+  }
+
+  /* === OPTIONS === */
+  .options-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .option-btn {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px; border-radius: 12px;
+    border: 1px solid var(--border); background: rgba(255,255,255,.03);
+    color: var(--text); font-family: var(--sans); font-size: 15px;
+    cursor: pointer; text-align: left; transition: all .18s;
+    position: relative; overflow: hidden;
+  }
+  .option-btn::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, #2d8a3e, #c8a800);
+    opacity: 0; transition: opacity .18s;
+  }
+  .option-btn:hover:not(:disabled) { border-color: var(--accent1); }
+  .option-btn:hover:not(:disabled)::before { opacity: .08; }
+  .option-letter {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: rgba(255,255,255,.06); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    flex-shrink: 0; transition: all .18s; position: relative; z-index: 1;
+  }
+  .option-text { position: relative; z-index: 1; }
+
+  .option-btn.selected { border-color: #c8a800; }
+  .option-btn.selected::before { opacity: .12; }
+  .option-btn.selected .option-letter { background: #c8a800; border-color: #c8a800; color: #0f1f12; }
+
+  .option-btn.correct  { border-color: var(--green); background: rgba(16,185,129,.08); }
+  .option-btn.correct .option-letter  { background: var(--green); border-color: var(--green); color: #fff; }
+  .option-btn.wrong    { border-color: var(--red); background: rgba(239,68,68,.08); }
+  .option-btn.wrong .option-letter    { background: var(--red); border-color: var(--red); color: #fff; }
+
+  /* === TRUE/FALSE === */
+  .tf-row { display: flex; gap: 12px; }
+  .tf-btn {
+    flex: 1; padding: 18px; border-radius: 14px;
+    border: 1px solid var(--border); background: rgba(255,255,255,.03);
+    color: var(--text); font-family: var(--sans); font-size: 16px; font-weight: 600;
+    cursor: pointer; transition: all .18s;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .tf-btn .tf-icon { font-size: 28px; }
+  .tf-btn:hover:not(:disabled) { border-color: #c8a800; background: rgba(200,168,0,.1); }
+  .tf-btn.selected  { border-color: #c8a800; background: rgba(200,168,0,.15); color: #c8a800; }
+  .tf-btn.correct   { border-color: var(--green); background: rgba(16,185,129,.12); color: var(--green); }
+  .tf-btn.wrong     { border-color: var(--red); background: rgba(239,68,68,.12); color: var(--red); }
+
+  /* === EXPLANATION === */
+  .explanation {
+    margin-top: 18px; padding: 16px 18px;
+    background: rgba(255,255,255,.04); border-radius: 12px;
+    border-left: 3px solid #c8a800;
+    font-size: 14px; line-height: 1.6; color: var(--muted);
+    animation: fadeIn .3s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .explanation strong { color: var(--text); }
+
+  .timestamp-row {
+    display: flex; align-items: center; gap: 6px;
+    margin-top: 10px; font-size: 11px; color: rgba(157,133,184,.6);
+    font-family: var(--mono);
+  }
+
+  /* === ACTIONS === */
+  .q-actions {
+    display: flex; gap: 10px; margin-top: 22px;
+    justify-content: flex-end;
+  }
+  .btn {
+    padding: 10px 22px; border-radius: 10px;
+    font-family: var(--sans); font-size: 14px; font-weight: 600;
+    cursor: pointer; border: none; transition: all .18s;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #c8a800, #e6c200);
+    color: #0f1f12; box-shadow: 0 4px 16px rgba(200,168,0,.4);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,168,0,.55); }
+  .btn-primary:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+  .btn-ghost {
+    background: transparent; color: var(--muted); border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--accent1); }
+
+  /* === RESULTS === */
+  .results-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 18px; padding: 36px 28px; text-align: center;
+    animation: slideIn .35s cubic-bezier(.4,0,.2,1);
+  }
+  .results-score {
+    font-family: var(--mono); font-size: 64px; font-weight: 700;
+    background: linear-gradient(135deg, #6ddb85, #c8a800, #f0f7f1);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    line-height: 1; margin: 16px 0;
+  }
+  .results-label { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+  .results-grade {
+    display: inline-block; padding: 6px 20px; border-radius: 99px;
+    font-size: 18px; font-weight: 700; margin-bottom: 28px;
+  }
+  .grade-A { background: rgba(16,185,129,.15); color: var(--green); border: 1px solid rgba(16,185,129,.3); }
+  .grade-B { background: rgba(245,158,11,.15); color: var(--amber); border: 1px solid rgba(245,158,11,.3); }
+  .grade-C { background: rgba(239,68,68,.15);  color: var(--red);   border: 1px solid rgba(239,68,68,.3); }
+
+  .results-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin: 24px 0;
+  }
+  .res-stat {
+    padding: 16px 12px; border-radius: 12px;
+    background: rgba(255,255,255,.04); border: 1px solid var(--border);
+  }
+  .res-stat-val { font-family: var(--mono); font-size: 28px; font-weight: 700; }
+  .res-stat-lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .res-stat.c .res-stat-val { color: var(--green); }
+  .res-stat.w .res-stat-val { color: var(--red); }
+  .res-stat.t .res-stat-val { color: var(--amber); }
+
+  .history-section {
+    margin-top: 28px; text-align: left;
+    max-height: 320px; overflow-y: auto;
+  }
+  .history-section h3 { font-size: 14px; color: var(--muted); margin-bottom: 12px; font-family: var(--mono); }
+  .hist-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 10px 12px; border-radius: 10px;
+    background: rgba(255,255,255,.03); margin-bottom: 6px;
+    border: 1px solid rgba(255,255,255,.05);
+  }
+  .hist-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+  .hist-dot.c { background: var(--green); }
+  .hist-dot.w { background: var(--red); }
+  .hist-q { font-size: 13px; color: var(--text); flex: 1; }
+  .hist-meta { font-size: 11px; color: var(--muted); font-family: var(--mono); white-space: nowrap; }
+
+  /* === SCROLLBAR === */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+  /* === TOAST === */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--card); border: 1px solid var(--border);
+    padding: 10px 20px; border-radius: 10px; font-size: 14px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.4);
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+    z-index: 100; white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 520px) {
+    .results-grid { grid-template-columns: repeat(2, 1fr); }
+    .q-text { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-orb orb3"></div>
+
+<div id="app">
+  <header>
+    <div class="logo-box">ΑΕΠΠ</div>
+    <div class="header-text">
+      <h1>ΑΕΠΠ Trainer</h1>
+      <p id="subtitle">Κεφ. 1 · Βασικές Έννοιες Αλγορίθμων</p>
+    </div>
+  </header>
+
+  <div class="controls-bar">
+    <button class="ctrl-btn" id="btnShuffle" onclick="toggleShuffle()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="16 3 21 3 21 8"/><polyline points="4 20 9 20 9 15"/>
+        <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+      </svg>
+      Τυχαία σειρά
+    </button>
+    <button class="ctrl-btn" id="btnFilter" onclick="cycleFilter()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+      </svg>
+      <span id="filterLabel">Όλες</span>
+    </button>
+    <button class="ctrl-btn" onclick="resetAll()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/>
+      </svg>
+      Επαναφορά
+    </button>
+    <button class="ctrl-btn" onclick="showStats()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+        <line x1="6" y1="20" x2="6" y2="14"/>
+      </svg>
+      Ιστορικό
+    </button>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-label">Πρόοδος</span>
+      <span class="progress-counter" id="progressCounter">0 / 0</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="progress-stats">
+      <div class="stat correct">✓ <span id="statCorrect">0</span> Σωστές</div>
+      <div class="stat wrong">✗ <span id="statWrong">0</span> Λάθος</div>
+      <div class="stat time">⏱ <span id="statTime">0:00</span></div>
+    </div>
+  </div>
+
+  <div id="questionArea"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const RAW_QUESTIONS = [
+  {
+    id:"AEPP_CH1_001", type:"true_false", difficulty:"easy", points:1,
+    tags:["δεδομένα","πληροφορία"],
+    question:"Η πληροφορία προκύπτει από την επεξεργασία δεδομένων.",
+    correct_answer:true,
+    explanation:"Η πληροφορία είναι το αποτέλεσμα της επεξεργασίας και οργάνωσης των δεδομένων, ώστε να έχει νόημα για τον χρήστη."
+  },
+  {
+    id:"AEPP_CH1_002", type:"true_false", difficulty:"easy", points:1,
+    tags:["δεδομένα"],
+    question:"Τα δεδομένα αποτελούν την πρώτη ύλη της επεξεργασίας.",
+    correct_answer:true,
+    explanation:"Τα δεδομένα είναι η ακατέργαστη πρώτη ύλη που εισάγεται στον υπολογιστή για επεξεργασία."
+  },
+  {
+    id:"AEPP_CH1_003", type:"true_false", difficulty:"medium", points:1,
+    tags:["αλγόριθμος","περατότητα"],
+    question:"Ένας αλγόριθμος μπορεί να εκτελείται επ' άπειρον και να θεωρείται σωστός.",
+    correct_answer:false,
+    explanation:"Η περατότητα είναι βασικό χαρακτηριστικό αλγορίθμου. Πρέπει να τερματίζει μετά από πεπερασμένο αριθμό βημάτων."
+  },
+  {
+    id:"AEPP_CH1_004", type:"true_false", difficulty:"medium", points:1,
+    tags:["καθοριστικότητα"],
+    question:"Οι εντολές ενός αλγορίθμου πρέπει να είναι σαφείς και χωρίς διφορούμενες ερμηνείες.",
+    correct_answer:true,
+    explanation:"Η καθοριστικότητα απαιτεί κάθε εντολή να είναι ακριβής και μονοσήμαντη."
+  },
+  {
+    id:"AEPP_CH1_005", type:"true_false", difficulty:"easy", points:1,
+    tags:["αλγόριθμος"],
+    question:"Κάθε αλγόριθμος πρέπει να διαθέτει τουλάχιστον μία έξοδο.",
+    correct_answer:true,
+    explanation:"Ο αλγόριθμος πρέπει να παράγει κάποιο αποτέλεσμα (έξοδο)."
+  },
+  {
+    id:"AEPP_CH1_006", type:"true_false", difficulty:"medium", points:1,
+    tags:["αποτελεσματικότητα"],
+    question:"Η αποτελεσματικότητα σχετίζεται με την πρακτική δυνατότητα επίλυσης του προβλήματος.",
+    correct_answer:true,
+    explanation:"Ο αλγόριθμος πρέπει να είναι εφαρμόσιμος στην πράξη."
+  },
+  {
+    id:"AEPP_CH1_007", type:"true_false", difficulty:"hard", points:1,
+    tags:["καθοριστικότητα"],
+    question:"Η ασάφεια επιτρέπεται σε έναν αλγόριθμο.",
+    correct_answer:false,
+    explanation:"Η ασάφεια δεν επιτρέπεται, διότι παραβιάζει την καθοριστικότητα."
+  },
+  {
+    id:"AEPP_CH1_008", type:"true_false", difficulty:"easy", points:1,
+    tags:["τύποι_δεδομένων"],
+    question:"Τα λογικά δεδομένα έχουν μόνο δύο δυνατές τιμές.",
+    correct_answer:true,
+    explanation:"ΑΛΗΘΗΣ (TRUE) και ΨΕΥΔΗΣ (FALSE)."
+  },
+  {
+    id:"AEPP_CH1_009", type:"single_choice", difficulty:"easy", points:1,
+    tags:["καθοριστικότητα"],
+    question:"Ποιο χαρακτηριστικό αλγορίθμου εξασφαλίζει σαφείς και ακριβείς εντολές;",
+    options:[
+      {id:"A",text:"Αποτελεσματικότητα"},
+      {id:"B",text:"Καθοριστικότητα"},
+      {id:"C",text:"Περατότητα"},
+      {id:"D",text:"Έξοδος"}
+    ],
+    correct_answer:"B",
+    explanation:"Η καθοριστικότητα απαιτεί κάθε εντολή να είναι σαφής και μονοσήμαντη."
+  },
+  {
+    id:"AEPP_CH1_010", type:"single_choice", difficulty:"easy", points:1,
+    tags:["τύποι_δεδομένων"],
+    question:"Ποιο από τα παρακάτω αποτελεί λογικό δεδομένο;",
+    options:[
+      {id:"A",text:"'ΑΕΠΠ'"},
+      {id:"B",text:"25"},
+      {id:"C",text:"ΑΛΗΘΗΣ"},
+      {id:"D",text:"3.14"}
+    ],
+    correct_answer:"C",
+    explanation:"Το ΑΛΗΘΗΣ είναι λογική τιμή (Boolean)."
+  },
+  {
+    id:"AEPP_CH1_011", type:"single_choice", difficulty:"medium", points:1,
+    tags:["αλγόριθμος"],
+    question:"Πόσα είδη δεδομένων αναφέρονται στο σχολικό βιβλίο;",
+    options:[
+      {id:"A",text:"2"},
+      {id:"B",text:"3"},
+      {id:"C",text:"4"},
+      {id:"D",text:"5"}
+    ],
+    correct_answer:"C",
+    explanation:"Τα 4 είδη δεδομένων είναι: αριθμητικά, αλφαριθμητικά, λογικά και ημερομηνία/ώρα."
+  },
+  {
+    id:"AEPP_CH1_012", type:"true_false", difficulty:"easy", points:1,
+    tags:["αλγόριθμος","είσοδος"],
+    question:"Κάθε αλγόριθμος πρέπει να έχει υποχρεωτικά είσοδο.",
+    correct_answer:false,
+    explanation:"Η είσοδος δεν είναι υποχρεωτική. Ένας αλγόριθμος μπορεί να μην έχει είσοδο (π.χ. να εκτυπώνει μια σταθερή τιμή)."
+  },
+  {
+    id:"AEPP_CH1_013", type:"single_choice", difficulty:"medium", points:2,
+    tags:["αλγόριθμος","χαρακτηριστικά"],
+    question:"Ποιο από τα παρακάτω ΔΕΝ είναι χαρακτηριστικό αλγορίθμου;",
+    options:[
+      {id:"A",text:"Περατότητα"},
+      {id:"B",text:"Καθοριστικότητα"},
+      {id:"C",text:"Ταχύτητα"},
+      {id:"D",text:"Αποτελεσματικότητα"}
+    ],
+    correct_answer:"C",
+    explanation:"Η ταχύτητα δεν είναι χαρακτηριστικό αλγορίθμου. Τα χαρακτηριστικά είναι: περατότητα, καθοριστικότητα, αποτελεσματικότητα, είσοδος και έξοδος."
+  },
+  {
+    id:"AEPP_CH1_014", type:"true_false", difficulty:"medium", points:1,
+    tags:["δεδομένα","αλφαριθμητικά"],
+    question:"Ο αριθμός τηλεφώνου '2310123456' είναι αριθμητικό δεδομένο.",
+    correct_answer:false,
+    explanation:"Αν και αποτελείται μόνο από ψηφία, ο αριθμός τηλεφώνου είναι αλφαριθμητικό δεδομένο γιατί δεν χρησιμοποιείται για αριθμητικές πράξεις."
+  },
+  {
+    id:"AEPP_CH1_015", type:"single_choice", difficulty:"hard", points:2,
+    tags:["επίλυση_προβλήματος"],
+    question:"Ποια είναι η σωστή σειρά σταδίων επίλυσης προβλήματος;",
+    options:[
+      {id:"A",text:"Ανάλυση → Κατανόηση → Υλοποίηση → Τεκμηρίωση"},
+      {id:"B",text:"Κατανόηση → Ανάλυση → Σχεδίαση → Υλοποίηση → Τεκμηρίωση"},
+      {id:"C",text:"Σχεδίαση → Κατανόηση → Ανάλυση → Υλοποίηση"},
+      {id:"D",text:"Κατανόηση → Υλοποίηση → Ανάλυση → Τεκμηρίωση"}
+    ],
+    correct_answer:"B",
+    explanation:"Η σωστή σειρά είναι: Κατανόηση → Ανάλυση → Σχεδίαση → Υλοποίηση → Τεκμηρίωση."
+  },
+  {
+    id:"AEPP_CH1_016", type:"true_false", difficulty:"easy", points:1,
+    tags:["πληροφορία"],
+    question:"Η πληροφορία έχει πάντα αξία για τον αποδέκτη.",
+    correct_answer:false,
+    explanation:"Η πληροφορία έχει αξία μόνο αν είναι κατανοητή και χρήσιμη για τον αποδέκτη. Άσχετα δεδομένα δεν αποτελούν χρήσιμη πληροφορία."
+  },
+  {
+    id:"AEPP_CH1_017", type:"single_choice", difficulty:"medium", points:1,
+    tags:["αλγόριθμος","αναπαράσταση"],
+    question:"Με ποιο τρόπο ΔΕΝ μπορεί να αναπαρασταθεί ένας αλγόριθμος;",
+    options:[
+      {id:"A",text:"Φυσική γλώσσα"},
+      {id:"B",text:"Διάγραμμα ροής"},
+      {id:"C",text:"Ψευδοκώδικας"},
+      {id:"D",text:"Πίνακας αληθείας"}
+    ],
+    correct_answer:"D",
+    explanation:"Ο πίνακας αληθείας χρησιμοποιείται στη λογική, όχι στην αναπαράσταση αλγορίθμων. Αλγόριθμοι αναπαρίστανται με φυσική γλώσσα, διάγραμμα ροής ή ψευδοκώδικα."
+  },
+  {
+    id:"AEPP_CH1_018", type:"true_false", difficulty:"hard", points:2,
+    tags:["αλγόριθμος","καθοριστικότητα"],
+    question:"Ένας αλγόριθμος που δίνει διαφορετικά αποτελέσματα για τα ίδια δεδομένα είναι αποδεκτός.",
+    correct_answer:false,
+    explanation:"Παραβιάζεται η καθοριστικότητα. Για τα ίδια δεδομένα εισόδου, ο αλγόριθμος πρέπει πάντα να παράγει το ίδιο αποτέλεσμα."
+  },
+  {
+    id:"AEPP_CH1_019", type:"single_choice", difficulty:"easy", points:1,
+    tags:["τύποι_δεδομένων","αριθμητικά"],
+    question:"Ποιο από τα παρακάτω είναι αριθμητικό δεδομένο;",
+    options:[
+      {id:"A",text:"'123'"},
+      {id:"B",text:"ΑΛΗΘΗΣ"},
+      {id:"C",text:"17.5"},
+      {id:"D",text:"'Αθήνα'"}
+    ],
+    correct_answer:"C",
+    explanation:"Το 17.5 είναι αριθμητικό δεδομένο. Το '123' και 'Αθήνα' είναι αλφαριθμητικά (σε εισαγωγικά), και ΑΛΗΘΗΣ είναι λογική τιμή."
+  },
+  {
+    id:"AEPP_CH1_020", type:"true_false", difficulty:"medium", points:1,
+    tags:["αλγόριθμος","περατότητα"],
+    question:"Ένας αλγόριθμος με άπειρα βήματα μπορεί να είναι χρήσιμος στην πράξη.",
+    correct_answer:false,
+    explanation:"Η περατότητα είναι απαραίτητη. Αλγόριθμος που δεν τερματίζει δεν είναι χρήσιμος ούτε αποδεκτός."
+  },
+  {
+    id:"AEPP_CH1_021", type:"single_choice", difficulty:"medium", points:2,
+    tags:["επίλυση_προβλήματος"],
+    question:"Τι εξετάζουμε στο στάδιο 'Κατανόηση προβλήματος';",
+    options:[
+      {id:"A",text:"Γράφουμε τον κώδικα"},
+      {id:"B",text:"Σχεδιάζουμε το διάγραμμα ροής"},
+      {id:"C",text:"Ορίζουμε τι ζητείται και τι δίνεται"},
+      {id:"D",text:"Δοκιμάζουμε το πρόγραμμα"}
+    ],
+    correct_answer:"C",
+    explanation:"Στην κατανόηση ορίζουμε το πρόβλημα: τι δεδομένα έχουμε (δεδομένα) και τι θέλουμε να βρούμε (ζητούμενα)."
+  },
+  {
+    id:"AEPP_CH1_022", type:"true_false", difficulty:"easy", points:1,
+    tags:["αλγόριθμος"],
+    question:"Ο αλγόριθμος μπορεί να γραφεί μόνο σε γλώσσα προγραμματισμού.",
+    correct_answer:false,
+    explanation:"Ο αλγόριθμος μπορεί να εκφραστεί με φυσική γλώσσα, ψευδοκώδικα ή διάγραμμα ροής — δεν απαιτεί γλώσσα προγραμματισμού."
+  },
+  {
+    id:"AEPP_CH1_023", type:"single_choice", difficulty:"hard", points:2,
+    tags:["δεδομένα","πληροφορία"],
+    question:"Ποια σχέση υπάρχει μεταξύ δεδομένων και πληροφορίας;",
+    options:[
+      {id:"A",text:"Είναι ταυτόσημες έννοιες"},
+      {id:"B",text:"Η πληροφορία είναι ακατέργαστη πρώτη ύλη"},
+      {id:"C",text:"Τα δεδομένα επεξεργάζονται για να παράξουν πληροφορία"},
+      {id:"D",text:"Η πληροφορία υπάρχει ανεξάρτητα από τα δεδομένα"}
+    ],
+    correct_answer:"C",
+    explanation:"Τα δεδομένα (ακατέργαστη πρώτη ύλη) επεξεργάζονται και μετατρέπονται σε πληροφορία που έχει νόημα για τον χρήστη."
+  },
+  {
+    id:"AEPP_CH1_024", type:"true_false", difficulty:"medium", points:1,
+    tags:["αποτελεσματικότητα","αλγόριθμος"],
+    question:"Ένας αλγόριθμος που απαιτεί περισσότερους πόρους από ό,τι διαθέτουμε είναι αποτελεσματικός.",
+    correct_answer:false,
+    explanation:"Η αποτελεσματικότητα σημαίνει ότι ο αλγόριθμος μπορεί να εκτελεστεί με τους διαθέσιμους πόρους. Αν απαιτεί αδύνατες συνθήκες, δεν είναι αποτελεσματικός."
+  },
+  {
+    id:"AEPP_CH1_025", type:"single_choice", difficulty:"medium", points:2,
+    tags:["επίλυση_προβλήματος"],
+    question:"Ποιο από τα παρακάτω ΔΕΝ αποτελεί στάδιο επίλυσης προβλήματος;",
+    options:[
+      {id:"A",text:"Κατανόηση του προβλήματος"},
+      {id:"B",text:"Ανάλυση του προβλήματος"},
+      {id:"C",text:"Τυχαία εκτέλεση"},
+      {id:"D",text:"Υλοποίηση αλγορίθμου"}
+    ],
+    correct_answer:"C",
+    explanation:"Η τυχαία εκτέλεση δεν αποτελεί μέρος της συστηματικής επίλυσης προβλήματος."
+  }
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let questions = [];
+let current = 0;
+let answered = false;
+let shuffleOn = false;
+let filterMode = 0; // 0=all, 1=easy, 2=medium, 3=hard
+const filterLabels = ['Όλες','Εύκολες','Μέτριες','Δύσκολες'];
+const filterDiffs  = [null,'easy','medium','hard'];
+
+let sessionLog = []; // {id, correct, timestamp, ms}
+let sessionStart = null;
+let timerInterval = null;
+let elapsed = 0;
+
+// ============================================================
+// STORAGE
+// ============================================================
+const STORAGE_KEY = 'aepp_trainer_v1';
+function loadHistory() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch { return []; }
+}
+function saveHistory(log) {
+  const all = loadHistory();
+  all.push(...log);
+  // keep last 500 entries
+  if (all.length > 500) all.splice(0, all.length - 500);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+}
+function clearHistory() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+function buildQuestionList() {
+  const diff = filterDiffs[filterMode];
+  let list = diff ? RAW_QUESTIONS.filter(q => q.difficulty === diff) : [...RAW_QUESTIONS];
+  if (shuffleOn) list = shuffle(list);
+  return list;
+}
+
+function startSession() {
+  questions = buildQuestionList();
+  current = 0;
+  sessionLog = [];
+  elapsed = 0;
+  sessionStart = Date.now();
+  clearInterval(timerInterval);
+  timerInterval = setInterval(updateTimer, 1000);
+  renderQuestion();
+  updateProgress();
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// ============================================================
+// TIMER
+// ============================================================
+function updateTimer() {
+  elapsed = Math.floor((Date.now() - sessionStart) / 1000);
+  const m = Math.floor(elapsed / 60).toString().padStart(1,'0');
+  const s = (elapsed % 60).toString().padStart(2,'0');
+  document.getElementById('statTime').textContent = m + ':' + s;
+}
+
+// ============================================================
+// PROGRESS
+// ============================================================
+function updateProgress() {
+  const total = questions.length;
+  const done  = sessionLog.length;
+  const pct   = total ? (done / total * 100) : 0;
+  const correct = sessionLog.filter(x => x.correct).length;
+  const wrong   = done - correct;
+
+  document.getElementById('progressCounter').textContent = done + ' / ' + total;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('statCorrect').textContent = correct;
+  document.getElementById('statWrong').textContent = wrong;
+}
+
+// ============================================================
+// RENDER QUESTION
+// ============================================================
+function renderQuestion() {
+  const area = document.getElementById('questionArea');
+  if (current >= questions.length) {
+    renderResults();
+    return;
+  }
+
+  answered = false;
+  const q = questions[current];
+
+  const diffMap = { easy:'badge-easy', medium:'badge-medium', hard:'badge-hard' };
+  const diffLbl = { easy:'Εύκολο', medium:'Μέτριο', hard:'Δύσκολο' };
+  const typeLbl = q.type === 'true_false' ? 'Σωστό/Λάθος' : 'Πολλαπλής επιλογής';
+
+  let optionsHTML = '';
+  if (q.type === 'true_false') {
+    optionsHTML = `
+      <div class="tf-row">
+        <button class="tf-btn" id="tf-true" onclick="answerTF(true)">
+          <span class="tf-icon">✓</span>ΣΩΣΤΟ
+        </button>
+        <button class="tf-btn" id="tf-false" onclick="answerTF(false)">
+          <span class="tf-icon">✗</span>ΛΑΘΟΣ
+        </button>
+      </div>`;
+  } else {
+    optionsHTML = `<div class="options-list">` +
+      q.options.map(opt => `
+        <button class="option-btn" id="opt-${opt.id}" onclick="answerMC('${opt.id}')">
+          <span class="option-letter">${opt.id}</span>
+          <span class="option-text">${opt.text}</span>
+        </button>`).join('') +
+      `</div>`;
+  }
+
+  area.innerHTML = `
+    <div class="q-card">
+      <div class="q-meta">
+        <span class="badge ${diffMap[q.difficulty]}">${diffLbl[q.difficulty]}</span>
+        <span class="badge badge-type">${typeLbl}</span>
+        <span class="badge badge-pts">${q.points} ${q.points === 1 ? 'μόριο' : 'μόρια'}</span>
+      </div>
+      <div class="q-number">Ερώτηση ${current + 1} από ${questions.length}</div>
+      <div class="q-text">${q.question}</div>
+      ${optionsHTML}
+      <div id="explanation" style="display:none"></div>
+      <div class="q-actions">
+        <button class="btn btn-ghost" onclick="skipQuestion()">Παράλειψη</button>
+        <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>Επόμενη →</button>
+      </div>
+    </div>`;
+}
+
+// ============================================================
+// ANSWER HANDLERS
+// ============================================================
+function answerTF(userAnswer) {
+  if (answered) return;
+  answered = true;
+  const q = questions[current];
+  const correct = userAnswer === q.correct_answer;
+  const ts = new Date();
+
+  logAnswer(q.id, correct, ts);
+
+  const trueBtn  = document.getElementById('tf-true');
+  const falseBtn = document.getElementById('tf-false');
+  trueBtn.disabled = falseBtn.disabled = true;
+
+  if (userAnswer === true) {
+    trueBtn.classList.add(correct ? 'correct' : 'wrong');
+  } else {
+    falseBtn.classList.add(correct ? 'correct' : 'wrong');
+  }
+  // Always show correct answer
+  if (!correct) {
+    const correctBtn = document.getElementById(q.correct_answer ? 'tf-true' : 'tf-false');
+    correctBtn.classList.add('correct');
+  }
+
+  showExplanation(q.explanation, correct, ts);
+  document.getElementById('btnNext').disabled = false;
+  updateProgress();
+}
+
+function answerMC(optId) {
+  if (answered) return;
+  answered = true;
+  const q = questions[current];
+  const correct = optId === q.correct_answer;
+  const ts = new Date();
+
+  logAnswer(q.id, correct, ts);
+
+  // disable all
+  q.options.forEach(opt => {
+    const btn = document.getElementById('opt-' + opt.id);
+    btn.disabled = true;
+    if (opt.id === optId) btn.classList.add(correct ? 'correct' : 'wrong');
+    if (opt.id === q.correct_answer && !correct) btn.classList.add('correct');
+  });
+
+  showExplanation(q.explanation, correct, ts);
+  document.getElementById('btnNext').disabled = false;
+  updateProgress();
+}
+
+function logAnswer(qid, correct, ts) {
+  sessionLog.push({
+    id: qid,
+    correct,
+    timestamp: ts.toISOString(),
+    ms: Date.now() - sessionStart
+  });
+}
+
+function showExplanation(text, correct, ts) {
+  const el = document.getElementById('explanation');
+  const icon = correct ? '✓' : '✗';
+  const color = correct ? '#10b981' : '#ef4444';
+  const label = correct ? 'Σωστά!' : 'Λάθος!';
+  const timeStr = ts.toLocaleTimeString('el-GR', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+
+  el.style.display = 'block';
+  el.innerHTML = `
+    <strong style="color:${color}">${icon} ${label}</strong><br><br>${text}
+    <div class="timestamp-row">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
+      Απαντήθηκε: ${timeStr}
+    </div>`;
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function nextQuestion() {
+  current++;
+  if (current >= questions.length) {
+    renderResults();
+  } else {
+    renderQuestion();
+  }
+}
+
+function skipQuestion() {
+  if (!answered) {
+    sessionLog.push({
+      id: questions[current].id,
+      correct: null,
+      timestamp: new Date().toISOString(),
+      ms: Date.now() - sessionStart,
+      skipped: true
+    });
+    updateProgress();
+  }
+  current++;
+  if (current >= questions.length) renderResults();
+  else renderQuestion();
+}
+
+// ============================================================
+// RESULTS
+// ============================================================
+function renderResults() {
+  clearInterval(timerInterval);
+  saveHistory(sessionLog);
+
+  const total    = questions.length;
+  const answered = sessionLog.filter(x => !x.skipped);
+  const correct  = sessionLog.filter(x => x.correct).length;
+  const wrong    = sessionLog.filter(x => x.correct === false && !x.skipped).length;
+  const skipped  = sessionLog.filter(x => x.skipped).length;
+
+  const totalPoints = questions.reduce((s,q) => s + q.points, 0);
+  const earnedPoints = sessionLog.filter(x => x.correct)
+    .reduce((s, x) => {
+      const q = RAW_QUESTIONS.find(r => r.id === x.id);
+      return s + (q ? q.points : 0);
+    }, 0);
+
+  const pct = total ? Math.round(correct / total * 100) : 0;
+  const m = Math.floor(elapsed / 60);
+  const s = (elapsed % 60).toString().padStart(2,'0');
+
+  let gradeClass, gradeLabel;
+  if (pct >= 75) { gradeClass = 'grade-A'; gradeLabel = 'Άριστα 🏆'; }
+  else if (pct >= 50) { gradeClass = 'grade-B'; gradeLabel = 'Καλά 👍'; }
+  else { gradeClass = 'grade-C'; gradeLabel = 'Χρειάζεσαι επανάληψη 📚'; }
+
+  const histItems = [...sessionLog].reverse().map(entry => {
+    const q = RAW_QUESTIONS.find(r => r.id === entry.id);
+    if (!q) return '';
+    const ts = new Date(entry.timestamp).toLocaleTimeString('el-GR', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+    if (entry.skipped) return `
+      <div class="hist-item">
+        <div class="hist-dot" style="background:var(--muted)"></div>
+        <div class="hist-q">${q.question.substring(0,60)}…</div>
+        <div class="hist-meta">Παράλειψη · ${ts}</div>
+      </div>`;
+    return `
+      <div class="hist-item">
+        <div class="hist-dot ${entry.correct ? 'c' : 'w'}"></div>
+        <div class="hist-q">${q.question.substring(0,60)}…</div>
+        <div class="hist-meta">${entry.correct ? '✓' : '✗'} · ${ts}</div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('questionArea').innerHTML = `
+    <div class="results-card">
+      <div class="results-label">Αποτέλεσμα Συνεδρίας</div>
+      <div class="results-score">${pct}%</div>
+      <div class="results-grade ${gradeClass}">${gradeLabel}</div>
+      <div style="font-size:14px;color:var(--muted);margin-bottom:4px">${earnedPoints} / ${totalPoints} μόρια</div>
+
+      <div class="results-grid">
+        <div class="res-stat c">
+          <div class="res-stat-val">${correct}</div>
+          <div class="res-stat-lbl">Σωστές</div>
+        </div>
+        <div class="res-stat w">
+          <div class="res-stat-val">${wrong}</div>
+          <div class="res-stat-lbl">Λάθος</div>
+        </div>
+        <div class="res-stat t">
+          <div class="res-stat-val">${m}:${s}</div>
+          <div class="res-stat-lbl">Χρόνος</div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" style="width:100%;margin-top:8px" onclick="startSession()">
+        ↺ Νέα Προσπάθεια
+      </button>
+
+      <div class="history-section">
+        <h3>// ΙΣΤΟΡΙΚΟ ΣΥΝΕΔΡΙΑΣ</h3>
+        ${histItems}
+      </div>
+    </div>`;
+}
+
+// ============================================================
+// CONTROLS
+// ============================================================
+function toggleShuffle() {
+  shuffleOn = !shuffleOn;
+  document.getElementById('btnShuffle').classList.toggle('active', shuffleOn);
+  showToast(shuffleOn ? '🔀 Τυχαία σειρά ενεργή' : '📋 Κανονική σειρά');
+  startSession();
+}
+
+function cycleFilter() {
+  filterMode = (filterMode + 1) % 4;
+  document.getElementById('filterLabel').textContent = filterLabels[filterMode];
+  document.getElementById('btnFilter').classList.toggle('active', filterMode !== 0);
+  startSession();
+}
+
+function resetAll() {
+  startSession();
+}
+
+function showStats() {
+  const all = loadHistory();
+  if (!all.length) { showToast('Δεν υπάρχει ιστορικό ακόμα'); return; }
+  const total   = all.length;
+  const correct = all.filter(x => x.correct).length;
+  const pct     = Math.round(correct / total * 100);
+  showToast(`📊 Συνολικά: ${correct}/${total} σωστές (${pct}%)`);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ============================================================
+// START
+// ============================================================
+startSession();
+</script>
+</body>
+</html>
