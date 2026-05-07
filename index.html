@@ -236,6 +236,20 @@
     font-family: var(--mono);
   }
 
+  /* === CODE BLOCK === */
+  .code-block {
+    background: #0a140c; border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 18px; margin-bottom: 16px;
+    font-family: var(--mono); font-size: 14px; line-height: 1.8;
+    color: #a8d8b0; white-space: pre; overflow-x: auto;
+    border-left: 3px solid var(--accent1);
+  }
+  .code-label {
+    font-size: 11px; font-family: var(--mono); color: var(--muted);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
   /* === EXPLANATION === */
   .explanation {
     margin-top: 18px; padding: 16px 18px;
@@ -365,6 +379,12 @@
   </header>
 
   <div class="controls-bar">
+    <button class="ctrl-btn" id="btnChapter" onclick="cycleChapter()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
+      <span id="chapterLabel">Κεφ. 1</span>
+    </button>
     <button class="ctrl-btn" id="btnShuffle" onclick="toggleShuffle()">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <polyline points="16 3 21 3 21 8"/><polyline points="4 20 9 20 9 15"/>
@@ -415,9 +435,26 @@
 
 <script>
 // ============================================================
-// DATA
+// DATA — ΚΕΦΑΛΑΙΑ
 // ============================================================
-const RAW_QUESTIONS = [
+const CHAPTERS = [
+  {
+    id: "ch1",
+    label: "Κεφ. 1",
+    title: "Βασικές Έννοιες Αλγορίθμων",
+    subtitle: "Κεφ. 1 · Βασικές Έννοιες Αλγορίθμων",
+    questions: [] // filled below
+  },
+  {
+    id: "ch2",
+    label: "Κεφ. 2",
+    title: "Έννοια και Αναπαράσταση Αλγορίθμων",
+    subtitle: "Κεφ. 2 · Έννοια και Αναπαράσταση Αλγορίθμων",
+    questions: [] // filled below
+  }
+];
+
+const CH1_QUESTIONS = [
   {
     id:"AEPP_CH1_001", type:"true_false", difficulty:"easy", points:1,
     tags:["δεδομένα","πληροφορία"],
@@ -661,6 +698,161 @@ const RAW_QUESTIONS = [
   }
 ];
 
+const CH2_QUESTIONS = [
+  {
+    id:"AEPP_CH2_001", type:"true_false", difficulty:"easy", points:1,
+    tags:["αλγόριθμος"],
+    question:"Ένας αλγόριθμος αποτελεί πεπερασμένη ακολουθία ενεργειών.",
+    correct_answer:true,
+    explanation:"Ο αλγόριθμος είναι μια πεπερασμένη και οργανωμένη ακολουθία βημάτων που οδηγεί στην επίλυση ενός προβλήματος."
+  },
+  {
+    id:"AEPP_CH2_002", type:"single_choice", difficulty:"easy", points:1,
+    tags:["αναπαράσταση"],
+    question:"Ποιος τρόπος χρησιμοποιείται για γραφική αναπαράσταση αλγορίθμου;",
+    options:[
+      {id:"A",text:"Πίνακας"},
+      {id:"B",text:"Διάγραμμα ροής"},
+      {id:"C",text:"Συνάρτηση"},
+      {id:"D",text:"Μεταβλητή"}
+    ],
+    correct_answer:"B",
+    explanation:"Το Διάγραμμα Ροής (Flowchart) είναι η γραφική αναπαράσταση αλγορίθμου."
+  },
+  {
+    id:"AEPP_CH2_003", type:"true_false", difficulty:"medium", points:1,
+    tags:["αναπαράσταση"],
+    question:"Η φυσική γλώσσα μπορεί να χρησιμοποιηθεί για την περιγραφή αλγορίθμου.",
+    correct_answer:true,
+    explanation:"Η φυσική γλώσσα (καθημερινή γλώσσα) είναι ένας από τους τρόπους περιγραφής αλγορίθμων."
+  },
+  {
+    id:"AEPP_CH2_004", type:"single_choice", difficulty:"medium", points:2,
+    tags:["αναπαράσταση"],
+    question:"Ποιο από τα παρακάτω ΔΕΝ αποτελεί τρόπο αναπαράστασης αλγορίθμου;",
+    options:[
+      {id:"A",text:"Φυσική γλώσσα"},
+      {id:"B",text:"Διάγραμμα ροής"},
+      {id:"C",text:"Ψευδογλώσσα"},
+      {id:"D",text:"Λειτουργικό σύστημα"}
+    ],
+    correct_answer:"D",
+    explanation:"Το λειτουργικό σύστημα δεν αποτελεί τρόπο αναπαράστασης αλγορίθμου."
+  },
+  {
+    id:"AEPP_CH2_005", type:"true_false", difficulty:"medium", points:1,
+    tags:["ψευδογλώσσα"],
+    question:"Η ψευδογλώσσα μοιάζει με γλώσσα προγραμματισμού.",
+    correct_answer:true,
+    explanation:"Η ψευδογλώσσα χρησιμοποιεί δομή και σύνταξη παρόμοια με τις γλώσσες προγραμματισμού."
+  },
+  {
+    id:"AEPP_CH2_006", type:"output_prediction", difficulty:"medium", points:2,
+    tags:["εκχώρηση","έξοδος"],
+    question:"Τι θα εμφανίσει ο παρακάτω αλγόριθμος;",
+    code_block:{language:"glossa", content:"Αλγόριθμος TEST\nΑ <- 5\nΒ <- Α + 3\nΕμφάνισε Β\nΤέλος TEST"},
+    correct_answer:"8",
+    explanation:"Η Β παίρνει την τιμή 5 + 3 = 8."
+  },
+  {
+    id:"AEPP_CH2_007", type:"output_prediction", difficulty:"medium", points:2,
+    tags:["εκχώρηση"],
+    question:"Τι θα εμφανίσει ο παρακάτω αλγόριθμος;",
+    code_block:{language:"glossa", content:"Αλγόριθμος TEST\nΧ <- 10\nΧ <- Χ - 4\nΕμφάνισε Χ\nΤέλος TEST"},
+    correct_answer:"6",
+    explanation:"Η Χ γίνεται αρχικά 10 και μετά 10 - 4 = 6."
+  },
+  {
+    id:"AEPP_CH2_008", type:"single_choice", difficulty:"hard", points:3,
+    tags:["λογικό_λάθος","εκχώρηση"],
+    question:"Ποιο λογικό λάθος υπάρχει στον παρακάτω αλγόριθμο;",
+    code_block:{language:"glossa", content:"Αλγόριθμος TEST\nΑ <- 5\nΒ <- 3\nΑ <- Β\nΕμφάνισε Α + Β\nΤέλος TEST"},
+    options:[
+      {id:"A",text:"Δεν υπάρχει λάθος"},
+      {id:"B",text:"Χάνεται η αρχική τιμή της Α"},
+      {id:"C",text:"Δεν επιτρέπεται η εκχώρηση"},
+      {id:"D",text:"Η Β δεν έχει τιμή"}
+    ],
+    correct_answer:"B",
+    explanation:"Με την εντολή Α <- Β χάνεται η αρχική τιμή της μεταβλητής Α (5)."
+  },
+  {
+    id:"AEPP_CH2_009", type:"true_false", difficulty:"medium", points:1,
+    tags:["είσοδος"],
+    question:"Ένας αλγόριθμος μπορεί να έχει περισσότερες από μία εισόδους.",
+    correct_answer:true,
+    explanation:"Ένας αλγόριθμος μπορεί να δέχεται πολλαπλά δεδομένα εισόδου."
+  },
+  {
+    id:"AEPP_CH2_010", type:"single_choice", difficulty:"easy", points:1,
+    tags:["εντολές_εξόδου"],
+    question:"Ποια εντολή χρησιμοποιείται για την εμφάνιση αποτελέσματος;",
+    options:[
+      {id:"A",text:"Διάβασε"},
+      {id:"B",text:"Εμφάνισε"},
+      {id:"C",text:"ΑΝ"},
+      {id:"D",text:"Τέλος"}
+    ],
+    correct_answer:"B",
+    explanation:"Η εντολή Εμφάνισε χρησιμοποιείται για έξοδο αποτελεσμάτων."
+  },
+  {
+    id:"AEPP_CH2_011", type:"fill_blank", difficulty:"medium", points:2,
+    tags:["εντολές_εισόδου"],
+    question:"Συμπλήρωσε την εντολή ώστε να διαβαστεί η μεταβλητή Α:\n__________ Α",
+    correct_answer:"Διάβασε",
+    explanation:"Η εντολή Διάβασε χρησιμοποιείται για ανάγνωση τιμών από τον χρήστη."
+  },
+  {
+    id:"AEPP_CH2_012", type:"single_choice", difficulty:"medium", points:2,
+    tags:["εκχώρηση"],
+    question:"Ποια από τις παρακάτω εντολές αποτελεί εντολή εκχώρησης τιμής;",
+    options:[
+      {id:"A",text:"Διάβασε Α"},
+      {id:"B",text:"Εμφάνισε Α"},
+      {id:"C",text:"Α <- 5"},
+      {id:"D",text:"Τέλος"}
+    ],
+    correct_answer:"C",
+    explanation:"Η εντολή εκχώρησης στη ΓΛΩΣΣΑ είναι <-."
+  },
+  {
+    id:"AEPP_CH2_013", type:"trace_table", difficulty:"hard", points:3,
+    tags:["trace_table","εκχώρηση"],
+    question:"Ποια είναι η τελική τιμή της μεταβλητής Χ;",
+    code_block:{language:"glossa", content:"Αλγόριθμος TRACE\nΧ <- 2\nΧ <- Χ + 5\nΧ <- Χ * 2\nΕμφάνισε Χ\nΤέλος TRACE"},
+    correct_answer:"14",
+    explanation:"2 → 2+5=7 → 7×2=14"
+  },
+  {
+    id:"AEPP_CH2_014", type:"true_false", difficulty:"medium", points:1,
+    tags:["εκχώρηση"],
+    question:"Η εντολή εκχώρησης αλλάζει την τιμή μιας μεταβλητής.",
+    correct_answer:true,
+    explanation:"Η εκχώρηση (<-) αντικαθιστά την προηγούμενη τιμή της μεταβλητής."
+  },
+  {
+    id:"AEPP_CH2_015", type:"single_choice", difficulty:"hard", points:2,
+    tags:["εκχώρηση"],
+    question:"Ποιο από τα παρακάτω αποτελεί σωστή εντολή εκχώρησης;",
+    options:[
+      {id:"A",text:"5 <- Α"},
+      {id:"B",text:"Α = <- 5"},
+      {id:"C",text:"Α <- 5"},
+      {id:"D",text:"<- Α 5"}
+    ],
+    correct_answer:"C",
+    explanation:"Η σωστή σύνταξη στη ΓΛΩΣΣΑ είναι: Μεταβλητή <- τιμή."
+  }
+];
+
+// Wire questions into chapters
+CHAPTERS[0].questions = CH1_QUESTIONS;
+CHAPTERS[1].questions = CH2_QUESTIONS;
+
+// Flat list for history lookups
+const ALL_QUESTIONS = [...CH1_QUESTIONS, ...CH2_QUESTIONS];
+
 // ============================================================
 // STATE
 // ============================================================
@@ -668,7 +860,8 @@ let questions = [];
 let current = 0;
 let answered = false;
 let shuffleOn = false;
-let filterMode = 0; // 0=all, 1=easy, 2=medium, 3=hard
+let filterMode = 0;
+let chapterIdx = 0; // current chapter index
 const filterLabels = ['Όλες','Εύκολες','Μέτριες','Δύσκολες'];
 const filterDiffs  = [null,'easy','medium','hard'];
 
@@ -700,8 +893,9 @@ function clearHistory() {
 // INIT
 // ============================================================
 function buildQuestionList() {
+  const ch = CHAPTERS[chapterIdx];
   const diff = filterDiffs[filterMode];
-  let list = diff ? RAW_QUESTIONS.filter(q => q.difficulty === diff) : [...RAW_QUESTIONS];
+  let list = diff ? ch.questions.filter(q => q.difficulty === diff) : [...ch.questions];
   if (shuffleOn) list = shuffle(list);
   return list;
 }
@@ -714,6 +908,8 @@ function startSession() {
   sessionStart = Date.now();
   clearInterval(timerInterval);
   timerInterval = setInterval(updateTimer, 1000);
+  // update subtitle
+  document.getElementById('subtitle').textContent = CHAPTERS[chapterIdx].subtitle;
   renderQuestion();
   updateProgress();
 }
@@ -768,7 +964,19 @@ function renderQuestion() {
 
   const diffMap = { easy:'badge-easy', medium:'badge-medium', hard:'badge-hard' };
   const diffLbl = { easy:'Εύκολο', medium:'Μέτριο', hard:'Δύσκολο' };
-  const typeLbl = q.type === 'true_false' ? 'Σωστό/Λάθος' : q.type === 'fill_blank' ? 'Συμπλήρωση κενού' : 'Πολλαπλής επιλογής';
+  const typeLblMap = {
+    true_false: 'Σωστό/Λάθος',
+    single_choice: 'Πολλαπλής επιλογής',
+    fill_blank: 'Συμπλήρωση κενού',
+    output_prediction: 'Πρόβλεψη εξόδου',
+    trace_table: 'Ιχνηλάτηση'
+  };
+  const typeLbl = typeLblMap[q.type] || q.type;
+
+  // Code block HTML (shared by output_prediction, trace_table, single_choice with code)
+  const codeHTML = q.code_block ? `
+    <div class="code-label">// ΓΛΩΣΣΑ</div>
+    <div class="code-block">${q.code_block.content}</div>` : '';
 
   let optionsHTML = '';
   if (q.type === 'true_false') {
@@ -786,14 +994,30 @@ function renderQuestion() {
       <div class="fb-wrap">
         <div class="fb-hint">// Γράψε την απάντηση και πάτα Enter ή το κουμπί</div>
         <div class="fb-input-row">
-          <input class="fb-input" id="fb-input" type="text" placeholder="Η απάντησή σου..." 
+          <input class="fb-input" id="fb-input" type="text" placeholder="Η απάντησή σου..."
+            onkeydown="if(event.key==='Enter') answerFB()" autocomplete="off" autocorrect="off" spellcheck="false">
+          <button class="fb-submit" id="fb-submit" onclick="answerFB()">Υποβολή</button>
+        </div>
+        <div id="fb-result"></div>
+      </div>`;
+  } else if (q.type === 'output_prediction' || q.type === 'trace_table') {
+    const hint = q.type === 'trace_table' ? '// Ιχνηλάτησε τον αλγόριθμο και γράψε την τελική τιμή' : '// Τι θα εμφανίσει ο αλγόριθμος;';
+    optionsHTML = `
+      ${codeHTML}
+      <div class="fb-wrap">
+        <div class="fb-hint">${hint}</div>
+        <div class="fb-input-row">
+          <input class="fb-input" id="fb-input" type="text" placeholder="Αποτέλεσμα..."
             onkeydown="if(event.key==='Enter') answerFB()" autocomplete="off" autocorrect="off" spellcheck="false">
           <button class="fb-submit" id="fb-submit" onclick="answerFB()">Υποβολή</button>
         </div>
         <div id="fb-result"></div>
       </div>`;
   } else {
-    optionsHTML = `<div class="options-list">` +
+    // single_choice — may have code_block too
+    optionsHTML = `
+      ${codeHTML}
+      <div class="options-list">` +
       q.options.map(opt => `
         <button class="option-btn" id="opt-${opt.id}" onclick="answerMC('${opt.id}')">
           <span class="option-letter">${opt.id}</span>
@@ -971,7 +1195,7 @@ function renderResults() {
   const totalPoints = questions.reduce((s,q) => s + q.points, 0);
   const earnedPoints = sessionLog.filter(x => x.correct)
     .reduce((s, x) => {
-      const q = RAW_QUESTIONS.find(r => r.id === x.id);
+      const q = ALL_QUESTIONS.find(r => r.id === x.id);
       return s + (q ? q.points : 0);
     }, 0);
 
@@ -985,7 +1209,7 @@ function renderResults() {
   else { gradeClass = 'grade-C'; gradeLabel = 'Χρειάζεσαι επανάληψη 📚'; }
 
   const histItems = [...sessionLog].reverse().map(entry => {
-    const q = RAW_QUESTIONS.find(r => r.id === entry.id);
+    const q = ALL_QUESTIONS.find(r => r.id === entry.id);
     if (!q) return '';
     const ts = new Date(entry.timestamp).toLocaleTimeString('el-GR', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
     if (entry.skipped) return `
@@ -1038,6 +1262,16 @@ function renderResults() {
 // ============================================================
 // CONTROLS
 // ============================================================
+function cycleChapter() {
+  chapterIdx = (chapterIdx + 1) % CHAPTERS.length;
+  filterMode = 0;
+  document.getElementById('filterLabel').textContent = filterLabels[0];
+  document.getElementById('btnFilter').classList.remove('active');
+  document.getElementById('chapterLabel').textContent = CHAPTERS[chapterIdx].label;
+  document.getElementById('btnChapter').classList.toggle('active', chapterIdx !== 0);
+  startSession();
+}
+
 function toggleShuffle() {
   shuffleOn = !shuffleOn;
   document.getElementById('btnShuffle').classList.toggle('active', shuffleOn);
