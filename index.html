@@ -209,6 +209,33 @@
   .tf-btn.correct   { border-color: var(--green); background: rgba(16,185,129,.12); color: var(--green); }
   .tf-btn.wrong     { border-color: var(--red); background: rgba(239,68,68,.12); color: var(--red); }
 
+  /* === FILL BLANK === */
+  .fb-wrap { display: flex; flex-direction: column; gap: 12px; }
+  .fb-input-row { display: flex; gap: 10px; align-items: center; }
+  .fb-input {
+    flex: 1; padding: 14px 18px; border-radius: 12px;
+    border: 1px solid var(--border); background: rgba(255,255,255,.04);
+    color: var(--text); font-family: var(--sans); font-size: 16px;
+    outline: none; transition: all .18s;
+  }
+  .fb-input:focus { border-color: #c8a800; box-shadow: 0 0 0 3px rgba(200,168,0,.15); }
+  .fb-input.correct { border-color: var(--green); background: rgba(16,185,129,.08); color: var(--green); }
+  .fb-input.wrong   { border-color: var(--red);   background: rgba(239,68,68,.08);  color: var(--red); }
+  .fb-input:disabled { opacity: .7; cursor: not-allowed; }
+  .fb-submit {
+    padding: 14px 22px; border-radius: 12px;
+    background: rgba(200,168,0,.15); border: 1px solid #c8a800;
+    color: #c8a800; font-family: var(--sans); font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all .18s; white-space: nowrap;
+  }
+  .fb-submit:hover { background: rgba(200,168,0,.25); }
+  .fb-submit:disabled { opacity: .4; cursor: not-allowed; }
+  .fb-hint { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  .fb-correct-answer {
+    margin-top: 6px; font-size: 13px; color: var(--green);
+    font-family: var(--mono);
+  }
+
   /* === EXPLANATION === */
   .explanation {
     margin-top: 18px; padding: 16px 18px;
@@ -403,54 +430,54 @@ const RAW_QUESTIONS = [
     tags:["δεδομένα"],
     question:"Τα δεδομένα αποτελούν την πρώτη ύλη της επεξεργασίας.",
     correct_answer:true,
-    explanation:"Τα δεδομένα είναι η ακατέργαστη πρώτη ύλη που εισάγεται στον υπολογιστή για επεξεργασία."
+    explanation:"Τα δεδομένα είναι η ακατέργαστη πρώτη ύλη που εισάγεται στον υπολογιστή."
   },
   {
     id:"AEPP_CH1_003", type:"true_false", difficulty:"medium", points:1,
     tags:["αλγόριθμος","περατότητα"],
     question:"Ένας αλγόριθμος μπορεί να εκτελείται επ' άπειρον και να θεωρείται σωστός.",
     correct_answer:false,
-    explanation:"Η περατότητα είναι βασικό χαρακτηριστικό αλγορίθμου. Πρέπει να τερματίζει μετά από πεπερασμένο αριθμό βημάτων."
+    explanation:"Η περατότητα είναι βασικό χαρακτηριστικό κάθε αλγορίθμου. Πρέπει να τερματίζει μετά από πεπερασμένο αριθμό βημάτων."
   },
   {
     id:"AEPP_CH1_004", type:"true_false", difficulty:"medium", points:1,
     tags:["καθοριστικότητα"],
-    question:"Οι εντολές ενός αλγορίθμου πρέπει να είναι σαφείς και χωρίς διφορούμενες ερμηνείες.",
+    question:"Οι εντολές ενός αλγορίθμου πρέπει να είναι σαφείς.",
     correct_answer:true,
-    explanation:"Η καθοριστικότητα απαιτεί κάθε εντολή να είναι ακριβής και μονοσήμαντη."
+    explanation:"Η καθοριστικότητα απαιτεί κάθε εντολή να είναι σαφής και χωρίς διφορούμενες ερμηνείες."
   },
   {
     id:"AEPP_CH1_005", type:"true_false", difficulty:"easy", points:1,
     tags:["αλγόριθμος"],
     question:"Κάθε αλγόριθμος πρέπει να διαθέτει τουλάχιστον μία έξοδο.",
     correct_answer:true,
-    explanation:"Ο αλγόριθμος πρέπει να παράγει κάποιο αποτέλεσμα (έξοδο)."
+    explanation:"Ο αλγόριθμος πρέπει να παράγει κάποιο αποτέλεσμα."
   },
   {
     id:"AEPP_CH1_006", type:"true_false", difficulty:"medium", points:1,
     tags:["αποτελεσματικότητα"],
-    question:"Η αποτελεσματικότητα σχετίζεται με την πρακτική δυνατότητα επίλυσης του προβλήματος.",
+    question:"Η αποτελεσματικότητα σχετίζεται με την πρακτική δυνατότητα επίλυσης προβλήματος.",
     correct_answer:true,
-    explanation:"Ο αλγόριθμος πρέπει να είναι εφαρμόσιμος στην πράξη."
+    explanation:"Ο αλγόριθμος πρέπει να είναι πρακτικά εφαρμόσιμος."
   },
   {
     id:"AEPP_CH1_007", type:"true_false", difficulty:"hard", points:1,
     tags:["καθοριστικότητα"],
     question:"Η ασάφεια επιτρέπεται σε έναν αλγόριθμο.",
     correct_answer:false,
-    explanation:"Η ασάφεια δεν επιτρέπεται, διότι παραβιάζει την καθοριστικότητα."
+    explanation:"Η ασάφεια παραβιάζει το χαρακτηριστικό της καθοριστικότητας."
   },
   {
     id:"AEPP_CH1_008", type:"true_false", difficulty:"easy", points:1,
     tags:["τύποι_δεδομένων"],
     question:"Τα λογικά δεδομένα έχουν μόνο δύο δυνατές τιμές.",
     correct_answer:true,
-    explanation:"ΑΛΗΘΗΣ (TRUE) και ΨΕΥΔΗΣ (FALSE)."
+    explanation:"Οι λογικές τιμές είναι ΑΛΗΘΗΣ και ΨΕΥΔΗΣ."
   },
   {
     id:"AEPP_CH1_009", type:"single_choice", difficulty:"easy", points:1,
     tags:["καθοριστικότητα"],
-    question:"Ποιο χαρακτηριστικό αλγορίθμου εξασφαλίζει σαφείς και ακριβείς εντολές;",
+    question:"Ποιο χαρακτηριστικό αλγορίθμου εξασφαλίζει σαφείς εντολές;",
     options:[
       {id:"A",text:"Αποτελεσματικότητα"},
       {id:"B",text:"Καθοριστικότητα"},
@@ -458,7 +485,7 @@ const RAW_QUESTIONS = [
       {id:"D",text:"Έξοδος"}
     ],
     correct_answer:"B",
-    explanation:"Η καθοριστικότητα απαιτεί κάθε εντολή να είναι σαφής και μονοσήμαντη."
+    explanation:"Η καθοριστικότητα απαιτεί σαφείς και ακριβείς εντολές."
   },
   {
     id:"AEPP_CH1_010", type:"single_choice", difficulty:"easy", points:1,
@@ -471,160 +498,166 @@ const RAW_QUESTIONS = [
       {id:"D",text:"3.14"}
     ],
     correct_answer:"C",
-    explanation:"Το ΑΛΗΘΗΣ είναι λογική τιμή (Boolean)."
+    explanation:"Το ΑΛΗΘΗΣ είναι λογικό δεδομένο."
   },
   {
-    id:"AEPP_CH1_011", type:"single_choice", difficulty:"medium", points:1,
-    tags:["αλγόριθμος"],
-    question:"Πόσα είδη δεδομένων αναφέρονται στο σχολικό βιβλίο;",
+    id:"AEPP_CH1_011", type:"single_choice", difficulty:"medium", points:2,
+    tags:["επίλυση_προβλήματος"],
+    question:"Ποιο από τα παρακάτω αποτελεί στάδιο επίλυσης προβλήματος;",
     options:[
-      {id:"A",text:"2"},
-      {id:"B",text:"3"},
-      {id:"C",text:"4"},
-      {id:"D",text:"5"}
+      {id:"A",text:"Κατανόηση προβλήματος"},
+      {id:"B",text:"Τυχαία εκτέλεση"},
+      {id:"C",text:"Παράλειψη ελέγχου"},
+      {id:"D",text:"Αποφυγή ανάλυσης"}
+    ],
+    correct_answer:"A",
+    explanation:"Η κατανόηση του προβλήματος είναι το πρώτο και βασικότερο στάδιο."
+  },
+  {
+    id:"AEPP_CH1_012", type:"single_choice", difficulty:"medium", points:2,
+    tags:["περατότητα"],
+    question:"Ποιο χαρακτηριστικό σχετίζεται με τον πεπερασμένο αριθμό βημάτων;",
+    options:[
+      {id:"A",text:"Καθοριστικότητα"},
+      {id:"B",text:"Είσοδος"},
+      {id:"C",text:"Περατότητα"},
+      {id:"D",text:"Έξοδος"}
     ],
     correct_answer:"C",
-    explanation:"Τα 4 είδη δεδομένων είναι: αριθμητικά, αλφαριθμητικά, λογικά και ημερομηνία/ώρα."
-  },
-  {
-    id:"AEPP_CH1_012", type:"true_false", difficulty:"easy", points:1,
-    tags:["αλγόριθμος","είσοδος"],
-    question:"Κάθε αλγόριθμος πρέπει να έχει υποχρεωτικά είσοδο.",
-    correct_answer:false,
-    explanation:"Η είσοδος δεν είναι υποχρεωτική. Ένας αλγόριθμος μπορεί να μην έχει είσοδο (π.χ. να εκτυπώνει μια σταθερή τιμή)."
+    explanation:"Η περατότητα απαιτεί ο αλγόριθμος να τερματίζει μετά από πεπερασμένα βήματα."
   },
   {
     id:"AEPP_CH1_013", type:"single_choice", difficulty:"medium", points:2,
-    tags:["αλγόριθμος","χαρακτηριστικά"],
-    question:"Ποιο από τα παρακάτω ΔΕΝ είναι χαρακτηριστικό αλγορίθμου;",
+    tags:["τύποι_δεδομένων"],
+    question:"Ποιο από τα παρακάτω αποτελεί αλφαριθμητικό δεδομένο;",
     options:[
-      {id:"A",text:"Περατότητα"},
-      {id:"B",text:"Καθοριστικότητα"},
-      {id:"C",text:"Ταχύτητα"},
-      {id:"D",text:"Αποτελεσματικότητα"}
+      {id:"A",text:"'ΠΑΝΕΛΛΑΔΙΚΕΣ'"},
+      {id:"B",text:"125"},
+      {id:"C",text:"ΑΛΗΘΗΣ"},
+      {id:"D",text:"12.8"}
     ],
-    correct_answer:"C",
-    explanation:"Η ταχύτητα δεν είναι χαρακτηριστικό αλγορίθμου. Τα χαρακτηριστικά είναι: περατότητα, καθοριστικότητα, αποτελεσματικότητα, είσοδος και έξοδος."
+    correct_answer:"A",
+    explanation:"Τα αλφαριθμητικά (string) περικλείονται σε εισαγωγικά."
   },
   {
-    id:"AEPP_CH1_014", type:"true_false", difficulty:"medium", points:1,
-    tags:["δεδομένα","αλφαριθμητικά"],
-    question:"Ο αριθμός τηλεφώνου '2310123456' είναι αριθμητικό δεδομένο.",
-    correct_answer:false,
-    explanation:"Αν και αποτελείται μόνο από ψηφία, ο αριθμός τηλεφώνου είναι αλφαριθμητικό δεδομένο γιατί δεν χρησιμοποιείται για αριθμητικές πράξεις."
+    id:"AEPP_CH1_014", type:"single_choice", difficulty:"medium", points:2,
+    tags:["αποτελεσματικότητα"],
+    question:"Η δυνατότητα επίλυσης προβλήματος με πρακτικό τρόπο σχετίζεται με:",
+    options:[
+      {id:"A",text:"Την αποτελεσματικότητα"},
+      {id:"B",text:"Την είσοδο"},
+      {id:"C",text:"Την έξοδο"},
+      {id:"D",text:"Την ασάφεια"}
+    ],
+    correct_answer:"A",
+    explanation:"Η αποτελεσματικότητα αφορά την πρακτική εφαρμοσιμότητα."
   },
   {
     id:"AEPP_CH1_015", type:"single_choice", difficulty:"hard", points:2,
-    tags:["επίλυση_προβλήματος"],
-    question:"Ποια είναι η σωστή σειρά σταδίων επίλυσης προβλήματος;",
+    tags:["αλγόριθμος"],
+    question:"Ποιο από τα παρακάτω ΔΕΝ αποτελεί χαρακτηριστικό αλγορίθμου;",
     options:[
-      {id:"A",text:"Ανάλυση → Κατανόηση → Υλοποίηση → Τεκμηρίωση"},
-      {id:"B",text:"Κατανόηση → Ανάλυση → Σχεδίαση → Υλοποίηση → Τεκμηρίωση"},
-      {id:"C",text:"Σχεδίαση → Κατανόηση → Ανάλυση → Υλοποίηση"},
-      {id:"D",text:"Κατανόηση → Υλοποίηση → Ανάλυση → Τεκμηρίωση"}
-    ],
-    correct_answer:"B",
-    explanation:"Η σωστή σειρά είναι: Κατανόηση → Ανάλυση → Σχεδίαση → Υλοποίηση → Τεκμηρίωση."
-  },
-  {
-    id:"AEPP_CH1_016", type:"true_false", difficulty:"easy", points:1,
-    tags:["πληροφορία"],
-    question:"Η πληροφορία έχει πάντα αξία για τον αποδέκτη.",
-    correct_answer:false,
-    explanation:"Η πληροφορία έχει αξία μόνο αν είναι κατανοητή και χρήσιμη για τον αποδέκτη. Άσχετα δεδομένα δεν αποτελούν χρήσιμη πληροφορία."
-  },
-  {
-    id:"AEPP_CH1_017", type:"single_choice", difficulty:"medium", points:1,
-    tags:["αλγόριθμος","αναπαράσταση"],
-    question:"Με ποιο τρόπο ΔΕΝ μπορεί να αναπαρασταθεί ένας αλγόριθμος;",
-    options:[
-      {id:"A",text:"Φυσική γλώσσα"},
-      {id:"B",text:"Διάγραμμα ροής"},
-      {id:"C",text:"Ψευδοκώδικας"},
-      {id:"D",text:"Πίνακας αληθείας"}
-    ],
-    correct_answer:"D",
-    explanation:"Ο πίνακας αληθείας χρησιμοποιείται στη λογική, όχι στην αναπαράσταση αλγορίθμων. Αλγόριθμοι αναπαρίστανται με φυσική γλώσσα, διάγραμμα ροής ή ψευδοκώδικα."
-  },
-  {
-    id:"AEPP_CH1_018", type:"true_false", difficulty:"hard", points:2,
-    tags:["αλγόριθμος","καθοριστικότητα"],
-    question:"Ένας αλγόριθμος που δίνει διαφορετικά αποτελέσματα για τα ίδια δεδομένα είναι αποδεκτός.",
-    correct_answer:false,
-    explanation:"Παραβιάζεται η καθοριστικότητα. Για τα ίδια δεδομένα εισόδου, ο αλγόριθμος πρέπει πάντα να παράγει το ίδιο αποτέλεσμα."
-  },
-  {
-    id:"AEPP_CH1_019", type:"single_choice", difficulty:"easy", points:1,
-    tags:["τύποι_δεδομένων","αριθμητικά"],
-    question:"Ποιο από τα παρακάτω είναι αριθμητικό δεδομένο;",
-    options:[
-      {id:"A",text:"'123'"},
-      {id:"B",text:"ΑΛΗΘΗΣ"},
-      {id:"C",text:"17.5"},
-      {id:"D",text:"'Αθήνα'"}
+      {id:"A",text:"Καθοριστικότητα"},
+      {id:"B",text:"Περατότητα"},
+      {id:"C",text:"Ασάφεια"},
+      {id:"D",text:"Αποτελεσματικότητα"}
     ],
     correct_answer:"C",
-    explanation:"Το 17.5 είναι αριθμητικό δεδομένο. Το '123' και 'Αθήνα' είναι αλφαριθμητικά (σε εισαγωγικά), και ΑΛΗΘΗΣ είναι λογική τιμή."
+    explanation:"Η ασάφεια δεν επιτρέπεται σε αλγόριθμο."
   },
   {
-    id:"AEPP_CH1_020", type:"true_false", difficulty:"medium", points:1,
-    tags:["αλγόριθμος","περατότητα"],
-    question:"Ένας αλγόριθμος με άπειρα βήματα μπορεί να είναι χρήσιμος στην πράξη.",
+    id:"AEPP_CH1_016", type:"fill_blank", difficulty:"medium", points:2,
+    tags:["πληροφορία"],
+    question:"Η _________ είναι αποτέλεσμα επεξεργασίας δεδομένων.",
+    correct_answer:"πληροφορία",
+    explanation:"Η πληροφορία προκύπτει μετά από επεξεργασία δεδομένων."
+  },
+  {
+    id:"AEPP_CH1_017", type:"fill_blank", difficulty:"medium", points:2,
+    tags:["περατότητα"],
+    question:"Η _________ απαιτεί ο αλγόριθμος να ολοκληρώνεται μετά από πεπερασμένο αριθμό βημάτων.",
+    correct_answer:"περατότητα",
+    explanation:"Η περατότητα είναι βασικό χαρακτηριστικό αλγορίθμου."
+  },
+  {
+    id:"AEPP_CH1_018", type:"fill_blank", difficulty:"hard", points:2,
+    tags:["καθοριστικότητα"],
+    question:"Η _________ απαιτεί κάθε εντολή να είναι σαφής και ακριβής.",
+    correct_answer:"καθοριστικότητα",
+    explanation:"Η καθοριστικότητα σχετίζεται με σαφείς εντολές."
+  },
+  {
+    id:"AEPP_CH1_019", type:"single_choice", difficulty:"medium", points:2,
+    tags:["τύποι_δεδομένων"],
+    question:"Ποιο από τα παρακάτω αποτελεί αριθμητικό δεδομένο;",
+    options:[
+      {id:"A",text:"'125'"},
+      {id:"B",text:"125"},
+      {id:"C",text:"ΑΛΗΘΗΣ"},
+      {id:"D",text:"'3.14'"}
+    ],
+    correct_answer:"B",
+    explanation:"Οι αριθμητικές τιμές γράφονται χωρίς εισαγωγικά."
+  },
+  {
+    id:"AEPP_CH1_020", type:"true_false", difficulty:"hard", points:1,
+    tags:["αποτελεσματικότητα","καθοριστικότητα"],
+    question:"Η αποτελεσματικότητα σχετίζεται με τη σαφήνεια των εντολών.",
     correct_answer:false,
-    explanation:"Η περατότητα είναι απαραίτητη. Αλγόριθμος που δεν τερματίζει δεν είναι χρήσιμος ούτε αποδεκτός."
+    explanation:"Η σαφήνεια σχετίζεται με την καθοριστικότητα, όχι με την αποτελεσματικότητα."
   },
   {
     id:"AEPP_CH1_021", type:"single_choice", difficulty:"medium", points:2,
-    tags:["επίλυση_προβλήματος"],
-    question:"Τι εξετάζουμε στο στάδιο 'Κατανόηση προβλήματος';",
+    tags:["είσοδος"],
+    question:"Ποιο χαρακτηριστικό αλγορίθμου αφορά τις τιμές που δίνονται πριν από την εκτέλεση;",
     options:[
-      {id:"A",text:"Γράφουμε τον κώδικα"},
-      {id:"B",text:"Σχεδιάζουμε το διάγραμμα ροής"},
-      {id:"C",text:"Ορίζουμε τι ζητείται και τι δίνεται"},
-      {id:"D",text:"Δοκιμάζουμε το πρόγραμμα"}
+      {id:"A",text:"Έξοδος"},
+      {id:"B",text:"Καθοριστικότητα"},
+      {id:"C",text:"Είσοδος"},
+      {id:"D",text:"Περατότητα"}
     ],
     correct_answer:"C",
-    explanation:"Στην κατανόηση ορίζουμε το πρόβλημα: τι δεδομένα έχουμε (δεδομένα) και τι θέλουμε να βρούμε (ζητούμενα)."
+    explanation:"Η είσοδος αφορά τα δεδομένα που λαμβάνει ο αλγόριθμος."
   },
   {
-    id:"AEPP_CH1_022", type:"true_false", difficulty:"easy", points:1,
+    id:"AEPP_CH1_022", type:"single_choice", difficulty:"medium", points:2,
+    tags:["έξοδος"],
+    question:"Ποιο χαρακτηριστικό αλγορίθμου αφορά τα αποτελέσματα;",
+    options:[
+      {id:"A",text:"Έξοδος"},
+      {id:"B",text:"Είσοδος"},
+      {id:"C",text:"Καθοριστικότητα"},
+      {id:"D",text:"Περατότητα"}
+    ],
+    correct_answer:"A",
+    explanation:"Η έξοδος είναι το αποτέλεσμα της εκτέλεσης του αλγορίθμου."
+  },
+  {
+    id:"AEPP_CH1_023", type:"true_false", difficulty:"medium", points:1,
+    tags:["είσοδος"],
+    question:"Ένας αλγόριθμος μπορεί να μην έχει είσοδο.",
+    correct_answer:true,
+    explanation:"Υπάρχουν αλγόριθμοι που δεν χρειάζονται δεδομένα εισόδου (π.χ. εκτύπωση σταθερού μηνύματος)."
+  },
+  {
+    id:"AEPP_CH1_024", type:"true_false", difficulty:"hard", points:1,
     tags:["αλγόριθμος"],
-    question:"Ο αλγόριθμος μπορεί να γραφεί μόνο σε γλώσσα προγραμματισμού.",
+    question:"Κάθε πρόβλημα επιλύεται αποκλειστικά με έναν αλγόριθμο.",
     correct_answer:false,
-    explanation:"Ο αλγόριθμος μπορεί να εκφραστεί με φυσική γλώσσα, ψευδοκώδικα ή διάγραμμα ροής — δεν απαιτεί γλώσσα προγραμματισμού."
-  },
-  {
-    id:"AEPP_CH1_023", type:"single_choice", difficulty:"hard", points:2,
-    tags:["δεδομένα","πληροφορία"],
-    question:"Ποια σχέση υπάρχει μεταξύ δεδομένων και πληροφορίας;",
-    options:[
-      {id:"A",text:"Είναι ταυτόσημες έννοιες"},
-      {id:"B",text:"Η πληροφορία είναι ακατέργαστη πρώτη ύλη"},
-      {id:"C",text:"Τα δεδομένα επεξεργάζονται για να παράξουν πληροφορία"},
-      {id:"D",text:"Η πληροφορία υπάρχει ανεξάρτητα από τα δεδομένα"}
-    ],
-    correct_answer:"C",
-    explanation:"Τα δεδομένα (ακατέργαστη πρώτη ύλη) επεξεργάζονται και μετατρέπονται σε πληροφορία που έχει νόημα για τον χρήστη."
-  },
-  {
-    id:"AEPP_CH1_024", type:"true_false", difficulty:"medium", points:1,
-    tags:["αποτελεσματικότητα","αλγόριθμος"],
-    question:"Ένας αλγόριθμος που απαιτεί περισσότερους πόρους από ό,τι διαθέτουμε είναι αποτελεσματικός.",
-    correct_answer:false,
-    explanation:"Η αποτελεσματικότητα σημαίνει ότι ο αλγόριθμος μπορεί να εκτελεστεί με τους διαθέσιμους πόρους. Αν απαιτεί αδύνατες συνθήκες, δεν είναι αποτελεσματικός."
+    explanation:"Ένα πρόβλημα μπορεί να έχει πολλαπλές σωστές αλγοριθμικές λύσεις."
   },
   {
     id:"AEPP_CH1_025", type:"single_choice", difficulty:"medium", points:2,
     tags:["επίλυση_προβλήματος"],
     question:"Ποιο από τα παρακάτω ΔΕΝ αποτελεί στάδιο επίλυσης προβλήματος;",
     options:[
-      {id:"A",text:"Κατανόηση του προβλήματος"},
-      {id:"B",text:"Ανάλυση του προβλήματος"},
+      {id:"A",text:"Κατανόηση"},
+      {id:"B",text:"Ανάλυση"},
       {id:"C",text:"Τυχαία εκτέλεση"},
-      {id:"D",text:"Υλοποίηση αλγορίθμου"}
+      {id:"D",text:"Υλοποίηση"}
     ],
     correct_answer:"C",
-    explanation:"Η τυχαία εκτέλεση δεν αποτελεί μέρος της συστηματικής επίλυσης προβλήματος."
+    explanation:"Η τυχαία εκτέλεση δεν αποτελεί συστηματικό στάδιο επίλυσης προβλήματος."
   }
 ];
 
@@ -735,7 +768,7 @@ function renderQuestion() {
 
   const diffMap = { easy:'badge-easy', medium:'badge-medium', hard:'badge-hard' };
   const diffLbl = { easy:'Εύκολο', medium:'Μέτριο', hard:'Δύσκολο' };
-  const typeLbl = q.type === 'true_false' ? 'Σωστό/Λάθος' : 'Πολλαπλής επιλογής';
+  const typeLbl = q.type === 'true_false' ? 'Σωστό/Λάθος' : q.type === 'fill_blank' ? 'Συμπλήρωση κενού' : 'Πολλαπλής επιλογής';
 
   let optionsHTML = '';
   if (q.type === 'true_false') {
@@ -747,6 +780,17 @@ function renderQuestion() {
         <button class="tf-btn" id="tf-false" onclick="answerTF(false)">
           <span class="tf-icon">✗</span>ΛΑΘΟΣ
         </button>
+      </div>`;
+  } else if (q.type === 'fill_blank') {
+    optionsHTML = `
+      <div class="fb-wrap">
+        <div class="fb-hint">// Γράψε την απάντηση και πάτα Enter ή το κουμπί</div>
+        <div class="fb-input-row">
+          <input class="fb-input" id="fb-input" type="text" placeholder="Η απάντησή σου..." 
+            onkeydown="if(event.key==='Enter') answerFB()" autocomplete="off" autocorrect="off" spellcheck="false">
+          <button class="fb-submit" id="fb-submit" onclick="answerFB()">Υποβολή</button>
+        </div>
+        <div id="fb-result"></div>
       </div>`;
   } else {
     optionsHTML = `<div class="options-list">` +
@@ -824,6 +868,32 @@ function answerMC(optId) {
     if (opt.id === optId) btn.classList.add(correct ? 'correct' : 'wrong');
     if (opt.id === q.correct_answer && !correct) btn.classList.add('correct');
   });
+
+  showExplanation(q.explanation, correct, ts);
+  document.getElementById('btnNext').disabled = false;
+  updateProgress();
+}
+
+function answerFB() {
+  if (answered) return;
+  const q = questions[current];
+  const input = document.getElementById('fb-input');
+  const userVal = input.value.trim().toLowerCase();
+  const correctVal = q.correct_answer.toLowerCase();
+  const correct = userVal === correctVal;
+  const ts = new Date();
+
+  answered = true;
+  logAnswer(q.id, correct, ts);
+
+  input.disabled = true;
+  document.getElementById('fb-submit').disabled = true;
+  input.classList.add(correct ? 'correct' : 'wrong');
+
+  const resultEl = document.getElementById('fb-result');
+  if (!correct) {
+    resultEl.innerHTML = `<div class="fb-correct-answer">✓ Σωστή απάντηση: <strong>${q.correct_answer}</strong></div>`;
+  }
 
   showExplanation(q.explanation, correct, ts);
   document.getElementById('btnNext').disabled = false;
