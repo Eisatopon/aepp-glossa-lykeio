@@ -1,1086 +1,518 @@
 {
-  "id": "ch2",
-  "chapter": "ch2",
-  "chapter_title": "Βασικές Έννοιες Αλγορίθμων",
-  "section": "2",
-  "section_title": "Έννοια, Χαρακτηριστικά και Αναπαράσταση Αλγορίθμων",
+  "id": "ch1",
+  "chapter": "ch1",
+  "chapter_title": "Ανάλυση Προβλήματος",
+  "section": "1",
+  "section_title": "1.1-1.4: Έννοια Προβλήματος, Κατανόηση, Δομή, Καθορισμός Απαιτήσεων",
   "book": "ΒΙΒΛΙΟ 1",
   "metadata": {
     "created_at": "2026-05-07",
-    "version": "4.0",
+    "updated_at": "2026-05-08",
+    "version": "4.1",
+    "schema_version": "4.0",
     "exam_mode": true,
     "estimated_minutes": 50,
-    "total_questions": 35,
-    "schema_version": "4.0",
-    "updated_at": "2026-05-08"
+    "total_questions": 16
   },
   "questions": [
     {
-      "id": "AEPP_CH2_001",
+      "id": "AEPP_CH1_001",
       "type": "true_false",
-      "subtype": null,
-      "difficulty": "easy",
-      "points": 1,
-      "tags": [
-        "αλγόριθμος"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ένας αλγόριθμος αποτελεί πεπερασμένη ακολουθία ενεργειών.",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ένας αλγόριθμος αποτελεί πεπερασμένη ακολουθία ενεργειών.",
-      "code_block": null,
-      "options": null,
-      "correct_answer": {
-        "type": "boolean",
-        "value": true
-      },
-      "explanation": "Ο αλγόριθμος είναι μια πεπερασμένη και οργανωμένη ακολουθία βημάτων για την επίλυση ενός προβλήματος."
-    },
-    {
-      "id": "AEPP_CH2_002",
-      "type": "true_false",
-      "subtype": null,
       "difficulty": "medium",
       "points": 1,
       "tags": [
-        "καθοριστικότητα"
+        "πρόβλημα",
+        "ορισμός",
+        "παγίδα"
       ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Η ασάφεια επιτρέπεται σε αλγορίθμους.",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Η ασάφεια επιτρέπεται σε αλγορίθμους.",
-      "code_block": null,
-      "options": null,
+      "exam_style": "panelladikes",
+      "learning_objective": "Αναγνώριση του ακριβούς ορισμού του προβλήματος και διάκριση από παρεμφερείς έννοιες",
+      "common_mistake": "Σύγχυση του 'δεν είναι γνωστή' με το 'δεν υπάρχει λύση'. Το πρόβλημα μπορεί να έχει λύση που δεν έχει ακόμα βρεθεί.",
+      "cognitive_skill": "diakrsi",
+      "question": "Ένα πρόβλημα χαρακτηρίζεται ως τέτοιο μόνο όταν δεν υπάρχει καμία λύση για αυτό.",
       "correct_answer": {
         "type": "boolean",
         "value": false
       },
-      "explanation": "Η ασάφεια παραβιάζει την καθοριστικότητα του αλγορίθμου."
+      "explanation": "ΛΑΘΟΣ. Ο ορισμός του βιβλίου (παρ. 1.1) αναφέρει ότι η λύση 'δεν είναι γνωστή, ούτε προφανής' — όχι ότι δεν υπάρχει. Ένα πρόβλημα μπορεί να έχει λύση που δεν έχει ακόμα βρεθεί.",
+      "estimated_seconds": 45
     },
     {
-      "id": "AEPP_CH2_003",
+      "id": "AEPP_CH1_002",
       "type": "true_false",
-      "subtype": null,
-      "difficulty": "easy",
+      "difficulty": "medium",
       "points": 1,
       "tags": [
-        "αναπαράσταση"
+        "δεδομένο",
+        "ορισμός",
+        "παγίδα"
       ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Η ψευδογλώσσα χρησιμοποιείται για περιγραφή αλγορίθμων.",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Η ψευδογλώσσα χρησιμοποιείται για περιγραφή αλγορίθμων.",
-      "code_block": null,
-      "options": null,
+      "exam_style": "scholiko",
+      "learning_objective": "Ακριβής κατανόηση του ορισμού του δεδομένου — αφορά και τις πέντε αισθήσεις",
+      "common_mistake": "Περιορισμός σε όραση/ακοή — ο ορισμός περιλαμβάνει και τις άλλες τρεις αισθήσεις.",
+      "cognitive_skill": "anaklysi",
+      "question": "Δεδομένο είναι μόνο οποιοδήποτε στοιχείο που μπορεί να γίνει αντιληπτό από τον άνθρωπο με την όραση ή την ακοή.",
       "correct_answer": {
         "type": "boolean",
-        "value": true
+        "value": false
       },
-      "explanation": "Η ψευδογλώσσα είναι ένας από τους κύριους τρόπους περιγραφής αλγορίθμων."
+      "explanation": "ΛΑΘΟΣ. Ο ορισμός του βιβλίου (παρ. 1.2) αναφέρει 'μία από τις πέντε αισθήσεις του' — όχι μόνο όραση και ακοή. Περιλαμβάνονται και η όσφρηση, η γεύση και η αφή.",
+      "estimated_seconds": 45
     },
     {
-      "id": "AEPP_CH2_004",
+      "id": "AEPP_CH1_003",
       "type": "true_false",
-      "subtype": null,
-      "difficulty": "easy",
+      "difficulty": "medium",
       "points": 1,
       "tags": [
-        "αλγόριθμος"
+        "πληροφορία",
+        "ορισμός",
+        "παγίδα"
       ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Κάθε αλγόριθμος πρέπει να έχει τουλάχιστον μία έξοδο.",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Κάθε αλγόριθμος πρέπει να έχει τουλάχιστον μία έξοδο.",
-      "code_block": null,
-      "options": null,
+      "exam_style": "panelladikes",
+      "learning_objective": "Διάκριση δεδομένων από πληροφορία — η πληροφορία προκύπτει ΜΟΝΟ μετά από επεξεργασία",
+      "common_mistake": "Θεώρηση ότι κάθε δεδομένο είναι αυτόματα και πληροφορία.",
+      "cognitive_skill": "diakrsi",
+      "question": "Κάθε δεδομένο που συλλέγεται από έναν αισθητήρα αποτελεί αυτόματα και πληροφορία.",
       "correct_answer": {
         "type": "boolean",
-        "value": true
+        "value": false
       },
-      "explanation": "Ο αλγόριθμος πρέπει να παράγει κάποιο αποτέλεσμα."
+      "explanation": "ΛΑΘΟΣ. Το βιβλίο (παρ. 1.2): η πληροφορία είναι 'οποιοδήποτε γνωσιακό στοιχείο που προέρχεται από επεξεργασία δεδομένων'. Τα ακατέργαστα δεδομένα του αισθητήρα δεν είναι πληροφορία μέχρι να επεξεργαστούν.",
+      "estimated_seconds": 45
     },
     {
-      "id": "AEPP_CH2_005",
-      "type": "true_false",
-      "subtype": null,
-      "difficulty": "easy",
-      "points": 1,
-      "tags": [
-        "εκχώρηση"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Η εκχώρηση τιμής αλλάζει την τιμή μιας μεταβλητής.",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Η εκχώρηση τιμής αλλάζει την τιμή μιας μεταβλητής.",
-      "code_block": null,
-      "options": null,
-      "correct_answer": {
-        "type": "boolean",
-        "value": true
-      },
-      "explanation": "Η εντολή εκχώρησης (<-) αντικαθιστά την προηγούμενη τιμή της μεταβλητής."
-    },
-    {
-      "id": "AEPP_CH2_006",
+      "id": "AEPP_CH1_004",
       "type": "single_choice",
-      "subtype": null,
+      "difficulty": "hard",
+      "points": 2,
+      "tags": [
+        "δεδομένα",
+        "πληροφορία",
+        "συνδυαστική"
+      ],
+      "exam_style": "synduastiki",
+      "learning_objective": "Συσχέτιση δεδομένων-επεξεργασίας-πληροφορίας σε σωστή διαδοχική σχέση",
+      "common_mistake": "Τοποθέτηση της πληροφορίας πριν την επεξεργασία (επιλογή Δ).",
+      "cognitive_skill": "synduasmos",
+      "question": "Ποια από τις παρακάτω ακολουθίες περιγράφει σωστά τη σχέση μεταξύ δεδομένων, πληροφορίας και κατανόησης ενός προβλήματος;",
+      "options": [
+        {
+          "id": "A",
+          "text": "Πληροφορία → Επεξεργασία → Δεδομένα → Κατανόηση"
+        },
+        {
+          "id": "B",
+          "text": "Δεδομένα → Επεξεργασία → Πληροφορία → Κατανόηση"
+        },
+        {
+          "id": "C",
+          "text": "Κατανόηση → Δεδομένα → Επεξεργασία → Πληροφορία"
+        },
+        {
+          "id": "D",
+          "text": "Δεδομένα → Πληροφορία → Επεξεργασία → Κατανόηση"
+        }
+      ],
+      "correct_answer": {
+        "type": "option",
+        "value": "B"
+      },
+      "explanation": "Σωστή η Β. Η σωστή ακολουθία: Δεδομένα (ακατέργαστα) → Επεξεργασία → Πληροφορία (γνωσιακό στοιχείο) → Κατανόηση. Η Δ είναι παγίδα: βάζει την πληροφορία πριν την επεξεργασία, κάτι που αντιβαίνει στον ορισμό (παρ. 1.2).",
+      "estimated_seconds": 90
+    },
+    {
+      "id": "AEPP_CH1_005",
+      "type": "single_choice",
       "difficulty": "medium",
       "points": 2,
       "tags": [
-        "καθοριστικότητα"
+        "δεδομένα",
+        "ζητούμενα",
+        "σενάριο"
       ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποιο χαρακτηριστικό αλγορίθμου απαιτεί σαφείς εντολές;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποιο χαρακτηριστικό αλγορίθμου απαιτεί σαφείς εντολές;",
-      "code_block": null,
+      "exam_style": "panelladikes",
+      "learning_objective": "Διάκριση δεδομένων (αυτά που δίνονται) από ζητούμενα (αυτά που ζητούνται) σε πραγματικό σενάριο",
+      "common_mistake": "Αντιστροφή των εννοιών — νομίζουν ότι το αποτέλεσμα (μέσος όρος) είναι δεδομένο.",
+      "cognitive_skill": "efarmogi",
+      "scenario": "Ο διευθυντής ενός σχολείου θέλει να υπολογίσει τον μέσο όρο βαθμολογίας των μαθητών της Γ' Λυκείου στα μαθήματα κατεύθυνσης. Έχει στη διάθεσή του τους βαθμούς όλων των μαθητών ανά μάθημα.",
+      "question": "Στο παραπάνω σενάριο, ποια από τα παρακάτω αποτελούν ΔΕΔΟΜΕΝΑ και ποια ΖΗΤΟΥΜΕΝΑ;",
       "options": [
         {
           "id": "A",
-          "text": "Περατότητα"
+          "text": "Δεδομένα: ο μέσος όρος | Ζητούμενα: οι βαθμοί των μαθητών"
         },
         {
           "id": "B",
-          "text": "Καθοριστικότητα"
+          "text": "Δεδομένα: οι βαθμοί των μαθητών | Ζητούμενα: ο μέσος όρος"
         },
         {
           "id": "C",
-          "text": "Αποτελεσματικότητα"
+          "text": "Δεδομένα: τα μαθήματα κατεύθυνσης | Ζητούμενα: οι μαθητές της Γ' Λυκείου"
         },
         {
           "id": "D",
-          "text": "Έξοδος"
+          "text": "Δεδομένα και ζητούμενα είναι το ίδιο πράγμα σε αυτή την περίπτωση"
         }
       ],
       "correct_answer": {
         "type": "option",
         "value": "B"
       },
-      "explanation": "Η καθοριστικότητα απαιτεί κάθε εντολή να είναι σαφής και μονοσήμαντη."
+      "explanation": "Σωστή η Β. Τα δεδομένα είναι αυτά που ΔΙΝΟΝΤΑΙ (βαθμοί μαθητών). Τα ζητούμενα είναι αυτά που ΠΡΕΠΕΙ ΝΑ ΒΡΕΘΟΥΝ (μέσος όρος). Η Α αντιστρέφει τις έννοιες — κλασική παγίδα πανελλαδικών (παρ. 1.4).",
+      "estimated_seconds": 60
     },
     {
-      "id": "AEPP_CH2_007",
-      "type": "single_choice",
-      "subtype": null,
+      "id": "AEPP_CH1_006",
+      "type": "true_false",
       "difficulty": "easy",
       "points": 1,
       "tags": [
-        "εκχώρηση"
+        "στάδια",
+        "αντιμετώπιση"
       ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποιο σύμβολο χρησιμοποιείται για εκχώρηση τιμής στη ΓΛΩΣΣΑ;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποιο σύμβολο χρησιμοποιείται για εκχώρηση τιμής στη ΓΛΩΣΣΑ;",
-      "code_block": null,
-      "options": [
-        {
-          "id": "A",
-          "text": "="
-        },
-        {
-          "id": "B",
-          "text": "<-"
-        },
-        {
-          "id": "C",
-          "text": "+"
-        },
-        {
-          "id": "D",
-          "text": "*"
-        }
-      ],
+      "exam_style": "scholiko",
+      "learning_objective": "Ανάκληση της σωστής σειράς των τριών σταδίων αντιμετώπισης",
+      "common_mistake": "Αντιστροφή ανάλυσης και επίλυσης ή παράλειψη της κατανόησης.",
+      "cognitive_skill": "anaklysi",
+      "question": "Τα στάδια αντιμετώπισης ενός προβλήματος είναι: κατανόηση, ανάλυση και επίλυση, με αυτή τη σειρά.",
       "correct_answer": {
-        "type": "option",
-        "value": "B"
+        "type": "boolean",
+        "value": true
       },
-      "explanation": "Στη ΓΛΩΣΣΑ η εκχώρηση γίνεται με το σύμβολο <-."
+      "explanation": "Σωστό. Σύμφωνα με το σχήμα 1.3 του βιβλίου (παρ. 1.4): Κατανόηση → Ανάλυση → Επίλυση. Η σειρά είναι υποχρεωτική — κάθε στάδιο βασίζεται στο προηγούμενο.",
+      "estimated_seconds": 30
     },
     {
-      "id": "AEPP_CH2_008",
+      "id": "AEPP_CH1_007",
       "type": "single_choice",
-      "subtype": null,
-      "difficulty": "easy",
-      "points": 1,
-      "tags": [
-        "εντολές_εξόδου"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποια εντολή χρησιμοποιείται για έξοδο δεδομένων;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποια εντολή χρησιμοποιείται για έξοδο δεδομένων;",
-      "code_block": null,
-      "options": [
-        {
-          "id": "A",
-          "text": "Διάβασε"
-        },
-        {
-          "id": "B",
-          "text": "Εμφάνισε"
-        },
-        {
-          "id": "C",
-          "text": "ΑΝ"
-        },
-        {
-          "id": "D",
-          "text": "Τέλος"
-        }
-      ],
-      "correct_answer": {
-        "type": "option",
-        "value": "B"
-      },
-      "explanation": "Η εντολή Εμφάνισε χρησιμοποιείται για την εμφάνιση αποτελεσμάτων."
-    },
-    {
-      "id": "AEPP_CH2_009",
-      "type": "single_choice",
-      "subtype": null,
       "difficulty": "medium",
       "points": 2,
       "tags": [
-        "εκχώρηση"
+        "στάδια",
+        "αντιμετώπιση",
+        "λογική_σειράς"
       ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποιο από τα παρακάτω αποτελεί σωστή εκχώρηση;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποιο από τα παρακάτω αποτελεί σωστή εκχώρηση;",
-      "code_block": null,
+      "exam_style": "synduastiki",
+      "learning_objective": "Κατανόηση γιατί η σειρά σταδίων είναι αμετάβλητη — λογική αλληλεξάρτηση",
+      "common_mistake": "Απομνημόνευση σειράς χωρίς κατανόηση της λογικής αλληλεξάρτησης.",
+      "cognitive_skill": "kritiki",
+      "question": "Για ποιον λόγο η σειρά των σταδίων αντιμετώπισης (Κατανόηση → Ανάλυση → Επίλυση) δεν μπορεί να αλλάξει;",
       "options": [
         {
           "id": "A",
-          "text": "5 <- Α"
+          "text": "Επειδή το βιβλίο την ορίζει έτσι και δεν επιτρέπονται παραλλαγές"
         },
         {
           "id": "B",
-          "text": "Α <- 5"
+          "text": "Επειδή η ανάλυση προϋποθέτει κατανόηση και η επίλυση προϋποθέτει ανάλυση — κάθε στάδιο βασίζεται στο προηγούμενο"
         },
         {
           "id": "C",
-          "text": "Α =<- 5"
+          "text": "Επειδή ο υπολογιστής εκτελεί πάντα με αυτή τη σειρά"
         },
         {
           "id": "D",
-          "text": "<- Α 5"
+          "text": "Επειδή η σειρά είναι αυθαίρετη και μπορεί να αλλάξει ανάλογα με το πρόβλημα"
         }
       ],
       "correct_answer": {
         "type": "option",
         "value": "B"
       },
-      "explanation": "Η σωστή σύνταξη είναι: Μεταβλητή <- τιμή."
+      "explanation": "Σωστή η Β. Η σειρά είναι λογική: δεν μπορείς να αναλύσεις κάτι που δεν κατανόησες, ούτε να λύσεις κάτι που δεν ανάλυσες. Η Α είναι παγίδα (απομνημόνευση χωρίς κατανόηση). Η Δ είναι λανθασμένη — η σειρά ΔΕΝ είναι αυθαίρετη (παρ. 1.4).",
+      "estimated_seconds": 60
     },
     {
-      "id": "AEPP_CH2_010",
+      "id": "AEPP_CH1_008",
       "type": "single_choice",
-      "subtype": null,
-      "difficulty": "easy",
-      "points": 1,
+      "difficulty": "hard",
+      "points": 3,
       "tags": [
-        "αναπαράσταση"
+        "στάδια",
+        "αντιμετώπιση",
+        "σενάριο"
       ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποιο από τα παρακάτω αποτελεί τρόπο αναπαράστασης αλγορίθμου",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποιο από τα παρακάτω αποτελεί τρόπο αναπαράστασης αλγορίθμου;",
-      "code_block": null,
+      "exam_style": "panelladikes",
+      "learning_objective": "Εφαρμογή σταδίων σε σύνθετο σενάριο — αναγνώριση ποιο στάδιο αποφασίζει τη δομή",
+      "common_mistake": "Σύγχυση ανάλυσης με επίλυση — η διαίρεση σε υποπροβλήματα γίνεται στην ΑΝΑΛΥΣΗ, όχι στην επίλυση.",
+      "cognitive_skill": "efarmogi",
+      "scenario": "Μια εταιρεία ταξιδιών θέλει να δημιουργήσει σύστημα online κρατήσεων. Το σύστημα πρέπει να: (1) δέχεται κρατήσεις, (2) ελέγχει διαθεσιμότητα, (3) υπολογίζει κόστος με εκπτώσεις, (4) εκδίδει εισιτήρια, (5) στέλνει επιβεβαίωση email.",
+      "question": "Σε ποιο στάδιο θα πρέπει να αποφασιστεί ότι το σύστημα χρειάζεται ξεχωριστά υποπροβλήματα για 'έλεγχο διαθεσιμότητας' και 'υπολογισμό κόστους';",
       "options": [
         {
           "id": "A",
-          "text": "Διάγραμμα ροής"
+          "text": "Στην κατανόηση — γιατί εκεί εντοπίζονται τα δεδομένα και τα ζητούμενα"
         },
         {
           "id": "B",
-          "text": "Λειτουργικό σύστημα"
+          "text": "Στην ανάλυση — γιατί εκεί το πρόβλημα διασπάται σε απλούστερα υποπροβλήματα"
         },
         {
           "id": "C",
-          "text": "Μεταγλωττιστής"
+          "text": "Στην επίλυση — γιατί εκεί σχεδιάζονται οι αλγόριθμοι κάθε υποπροβλήματος"
         },
         {
           "id": "D",
-          "text": "Βάση δεδομένων"
+          "text": "Σε όλα τα στάδια ταυτόχρονα — γιατί η διαίρεση σε υποπροβλήματα είναι συνεχής"
+        }
+      ],
+      "correct_answer": {
+        "type": "option",
+        "value": "B"
+      },
+      "explanation": "Σωστή η Β. Η ανάλυση είναι το στάδιο όπου το πρόβλημα διασπάται σε απλούστερα υποπροβλήματα (παρ. 1.3). Στην κατανόηση εντοπίζουμε δεδομένα/ζητούμενα. Στην επίλυση υλοποιούμε. Η Δ είναι παγίδα — κάθε στάδιο έχει συγκεκριμένο ρόλο.",
+      "estimated_seconds": 90
+    },
+    {
+      "id": "AEPP_CH1_009",
+      "type": "true_false",
+      "difficulty": "medium",
+      "points": 1,
+      "tags": [
+        "δομή_προβλήματος",
+        "διαγραμματική_αναπαράσταση"
+      ],
+      "exam_style": "panelladikes",
+      "learning_objective": "Αναγνώριση του σχήματος διαγραμματικής αναπαράστασης — ορθογώνιο παραλληλόγραμμο",
+      "common_mistake": "Σύγχυση με διαγράμματα ροής (flowcharts) που χρησιμοποιούν ρόμβους για αποφάσεις.",
+      "cognitive_skill": "anaklysi",
+      "question": "Στη διαγραμματική αναπαράσταση της δομής ενός προβλήματος, τόσο το αρχικό πρόβλημα όσο και τα υποπροβλήματα αναπαρίστανται με ορθογώνια παραλληλόγραμμα.",
+      "correct_answer": {
+        "type": "boolean",
+        "value": true
+      },
+      "explanation": "Σωστό. Το βιβλίο (παρ. 1.3): 'το αρχικό πρόβλημα αναπαρίσταται από ένα ορθογώνιο παραλληλόγραμμο' και τα υποπροβλήματα με τον ίδιο τρόπο. Προσοχή: δεν είναι κύκλοι ή ρόμβοι.",
+      "estimated_seconds": 45
+    },
+    {
+      "id": "AEPP_CH1_010",
+      "type": "single_choice",
+      "difficulty": "hard",
+      "points": 3,
+      "tags": [
+        "δομή_προβλήματος",
+        "ανάλυση",
+        "παγίδα"
+      ],
+      "exam_style": "synduastiki",
+      "learning_objective": "Κατανόηση ρόλου διαγραμματικής αναπαράστασης — εργαλείο ανάλυσης, όχι αντικατάσταση αλγορίθμου",
+      "common_mistake": "Πίστη ότι η διαγραμματική αναπαράσταση αντικαθιστά τον αλγόριθμο ή ανήκει στην επίλυση.",
+      "cognitive_skill": "kritiki",
+      "question": "Ποια πρόταση περιγράφει με ακρίβεια το ρόλο της διαγραμματικής αναπαράστασης στην αντιμετώπιση προβλήματος;",
+      "options": [
+        {
+          "id": "A",
+          "text": "Αποτελεί μέρος της επίλυσης, αφού περιγράφει τον αλγόριθμο κάθε υποπροβλήματος"
+        },
+        {
+          "id": "B",
+          "text": "Είναι εργαλείο της ανάλυσης που βοηθά στην κατανόηση και τη σχεδίαση της λύσης, χωρίς να αντικαθιστά την επίλυση"
+        },
+        {
+          "id": "C",
+          "text": "Χρησιμοποιείται μόνο στην κατανόηση για να εντοπίσει δεδομένα και ζητούμενα"
+        },
+        {
+          "id": "D",
+          "text": "Είναι προαιρετικό βήμα που παραλείπεται σε απλά προβλήματα"
+        }
+      ],
+      "correct_answer": {
+        "type": "option",
+        "value": "B"
+      },
+      "explanation": "Σωστή η Β. Η διαγραμματική αναπαράσταση είναι εργαλείο της ΑΝΑΛΥΣΗΣ (παρ. 1.3). Δεν περιγράφει αλγόριθμο (Α λάθος), δεν εντοπίζει δεδομένα (Γ λάθος), δεν είναι προαιρετική (Δ λάθος).",
+      "estimated_seconds": 90
+    },
+    {
+      "id": "AEPP_CH1_011",
+      "type": "true_false",
+      "difficulty": "medium",
+      "points": 1,
+      "tags": [
+        "δομή_προβλήματος",
+        "ανάλυση",
+        "παγίδα"
+      ],
+      "exam_style": "panelladikes",
+      "learning_objective": "Κατανόηση κριτηρίου τερματισμού ανάλυσης — 'αρκετά απλά', όχι 'μία εντολή'",
+      "common_mistake": "Πίστη ότι η ανάλυση συνεχίζεται μέχρι κάθε υποπρόβλημα να αντιστοιχεί σε μία εντολή.",
+      "cognitive_skill": "katanoisi",
+      "question": "Η ανάλυση ενός προβλήματος σε υποπροβλήματα πρέπει να συνεχιστεί μέχρι κάθε υποπρόβλημα να αντιστοιχεί σε μία και μόνο εντολή.",
+      "correct_answer": {
+        "type": "boolean",
+        "value": false
+      },
+      "explanation": "ΛΑΘΟΣ. Το βιβλίο (παρ. 1.3): η ανάλυση συνεχίζεται 'μέχρις ότου τα επιμέρους προβλήματα θεωρηθούν αρκετά απλά'. Δεν αναφέρεται πουθενά 'μία εντολή' — αυτό είναι παγίδα που συγχέει ανάλυση προβλήματος με ανάλυση αλγορίθμου.",
+      "estimated_seconds": 45
+    },
+    {
+      "id": "AEPP_CH1_012",
+      "type": "single_choice",
+      "difficulty": "hard",
+      "points": 3,
+      "tags": [
+        "δομή_προβλήματος",
+        "σενάριο",
+        "υποπροβλήματα"
+      ],
+      "exam_style": "panelladikes",
+      "learning_objective": "Εφαρμογή ανάλυσης σε σενάριο — αναγνώριση σωστού πρώτου επιπέδου υποπροβλημάτων",
+      "common_mistake": "Επιλογή υπερβολικά λεπτομερούς πρώτου επιπέδου — το πρώτο επίπεδο ομαδοποιεί σε λογικές ενότητες.",
+      "cognitive_skill": "efarmogi",
+      "scenario": "Ένας φούρνος θέλει να αυτοματοποιήσει παραγγελίες. Το σύστημα: (1) δέχεται παραγγελία, (2) ελέγχει υλικά, (3) υπολογίζει κόστος+ΦΠΑ, (4) εκτυπώνει απόδειξη, (5) ενημερώνει απόθεμα.",
+      "question": "Ποιο είναι το πιο κατάλληλο πρώτο επίπεδο υποπροβλημάτων για τη διαγραμματική αναπαράσταση;",
+      "options": [
+        {
+          "id": "A",
+          "text": "Δέχεται παραγγελία → Ελέγχει υλικά → Υπολογίζει κόστος → Εκτυπώνει → Ενημερώνει"
+        },
+        {
+          "id": "B",
+          "text": "Εισαγωγή παραγγελίας → Επεξεργασία παραγγελίας → Ολοκλήρωση παραγγελίας"
+        },
+        {
+          "id": "C",
+          "text": "Δέχεται παραγγελία → Υπολογίζει κόστος → Εκτυπώνει απόδειξη"
+        },
+        {
+          "id": "D",
+          "text": "Έλεγχος υλικών → Υπολογισμός ΦΠΑ → Εκτύπωση → Ενημέρωση"
+        }
+      ],
+      "correct_answer": {
+        "type": "option",
+        "value": "B"
+      },
+      "explanation": "Σωστή η Β. Το πρώτο επίπεδο ομαδοποιεί σε λογικές ενότητες: Εισαγωγή → Επεξεργασία → Ολοκλήρωση. Η Α είναι υπερβολικά λεπτομερής για πρώτο επίπεδο. Η Γ παραλείπει κρίσιμα βήματα. Η Δ ξεκινά από ενδιάμεσο και παραλείπει εισαγωγή (παρ. 1.3).",
+      "estimated_seconds": 90
+    },
+    {
+      "id": "AEPP_CH1_013",
+      "type": "true_false",
+      "difficulty": "medium",
+      "points": 1,
+      "tags": [
+        "σαφήνεια",
+        "κατανόηση",
+        "παγίδα"
+      ],
+      "exam_style": "panelladikes",
+      "learning_objective": "Κατανόηση ότι η ασάφεια οδηγεί σε παρερμηνείες — κάθε ασάφεια είναι κρίσιμο λάθος",
+      "common_mistake": "Πίστη ότι η ασάφεια είναι αποδεκτή αν 'εννοείται' κάτι από τα συμφραζόμενα.",
+      "cognitive_skill": "kritiki",
+      "question": "Η ασαφής διατύπωση ενός προβλήματος είναι αποδεκτή, αρκεί ο επιλύων να 'καταλαβαίνει τι εννοεί' ο διατυπωτής.",
+      "correct_answer": {
+        "type": "boolean",
+        "value": false
+      },
+      "explanation": "ΛΑΘΟΣ. Το βιβλίο (παρ. 1.2) τονίζει ότι 'η σωστή διατύπωση έχει ειδικό βάρος στη σωστή κατανόηση'. Η ασάφεια οδηγεί σε παρερμηνείες — όπως δείχνει το παράδειγμα 'Ο Γιάννης και η Μαρία είναι παντρεμένοι' με τις δύο ερμηνείες.",
+      "estimated_seconds": 45
+    },
+    {
+      "id": "AEPP_CH1_014",
+      "type": "single_choice",
+      "difficulty": "hard",
+      "points": 3,
+      "tags": [
+        "δεδομένα",
+        "ζητούμενα",
+        "σενάριο",
+        "παγίδα"
+      ],
+      "exam_style": "panelladikes",
+      "learning_objective": "Εντοπισμός κρυφών δεδομένων σε σύνθετο σενάριο",
+      "common_mistake": "Παράλειψη 'κρυφών' δεδομένων που αναφέρονται παρεμπιπτόντως στο κείμενο.",
+      "cognitive_skill": "efarmogi",
+      "scenario": "Ένας μαθητής θέλει να υπολογίσει πόσες ώρες να διαβάζει καθημερινά για να τελειώσει 4 μαθήματα σε 20 ημέρες. Απαιτούμενες ώρες: Μαθηματικά 30, Φυσική 25, Χημεία 20, Βιολογία 15. Έχει ήδη διαβάσει 10 ώρες Μαθηματικών.",
+      "question": "Ποια από τα παρακάτω είναι τα ΠΡΑΓΜΑΤΙΚΑ δεδομένα του προβλήματος;",
+      "options": [
+        {
+          "id": "A",
+          "text": "4 μαθήματα, 20 ημέρες, ώρες ανά μάθημα, 10 ώρες ήδη διαβασμένες"
+        },
+        {
+          "id": "B",
+          "text": "4 μαθήματα, 20 ημέρες, ώρες ανά μάθημα μόνο"
+        },
+        {
+          "id": "C",
+          "text": "20 ημέρες, ώρες ανά μάθημα, 10 ώρες ήδη διαβασμένες"
+        },
+        {
+          "id": "D",
+          "text": "Όλα τα στοιχεία του σεναρίου είναι δεδομένα"
         }
       ],
       "correct_answer": {
         "type": "option",
         "value": "A"
       },
-      "explanation": "Το Διάγραμμα Ροής είναι γραφικός τρόπος αναπαράστασης αλγορίθμου."
+      "explanation": "Σωστή η Α. Τα δεδομένα: (1) 4 μαθήματα, (2) 20 ημέρες, (3) ώρες ανά μάθημα (30,25,20,15), (4) 10 ώρες ήδη διαβασμένες. Οι 10 ώρες είναι 'κρυφό' δεδομένο — πολλοί το παραλείπουν. Το ζητούμενο είναι οι ώρες/ημέρα (παρ. 1.4).",
+      "estimated_seconds": 90
     },
     {
-      "id": "AEPP_CH2_011",
-      "type": "code_analysis",
-      "subtype": "output_prediction",
-      "difficulty": "medium",
-      "points": 2,
-      "tags": [
-        "εκχώρηση",
-        "έξοδος"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Τι θα εμφανίσει ο αλγόριθμος;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Τι θα εμφανίσει ο αλγόριθμος;",
-      "code_block": {
-        "language": "glossa",
-        "content": "Α <- 5\nΒ <- 3\nΕμφάνισε Α + Β"
-      },
-      "options": null,
-      "correct_answer": {
-        "type": "text",
-        "value": "8"
-      },
-      "explanation": "5 + 3 = 8"
-    },
-    {
-      "id": "AEPP_CH2_012",
-      "type": "code_analysis",
-      "subtype": "output_prediction",
-      "difficulty": "medium",
-      "points": 2,
-      "tags": [
-        "εκχώρηση"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Τι θα εμφανίσει ο αλγόριθμος;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Τι θα εμφανίσει ο αλγόριθμος;",
-      "code_block": {
-        "language": "glossa",
-        "content": "Χ <- 10\nΧ <- Χ - 4\nΕμφάνισε Χ"
-      },
-      "options": null,
-      "correct_answer": {
-        "type": "text",
-        "value": "6"
-      },
-      "explanation": "10 - 4 = 6"
-    },
-    {
-      "id": "AEPP_CH2_013",
-      "type": "code_analysis",
-      "subtype": "output_prediction",
+      "id": "AEPP_CH1_015",
+      "type": "true_false",
       "difficulty": "easy",
-      "points": 2,
+      "points": 1,
       "tags": [
-        "εκχώρηση"
+        "επεξεργασία_δεδομένων"
       ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Τι θα εμφανίσει;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Τι θα εμφανίσει;",
-      "code_block": {
-        "language": "glossa",
-        "content": "Α <- 2\nΒ <- Α * 5\nΕμφάνισε Β"
-      },
-      "options": null,
+      "exam_style": "scholiko",
+      "learning_objective": "Αναγνώριση ανθρώπινου εγκεφάλου ως ιστορικού μηχανισμού επεξεργασίας δεδομένων",
+      "common_mistake": "Πίστη ότι η επεξεργασία δεδομένων είναι αποκλειστικά υπολογιστική λειτουργία.",
+      "cognitive_skill": "anaklysi",
+      "question": "Ο ανθρώπινος εγκέφαλος αποτελεί έναν 'μηχανισμό' επεξεργασίας δεδομένων που χρησιμοποιείται επί χιλιετίες.",
       "correct_answer": {
-        "type": "text",
-        "value": "10"
+        "type": "boolean",
+        "value": true
       },
-      "explanation": "2 * 5 = 10"
+      "explanation": "Σωστό. Το βιβλίο (παρ. 1.2): 'Επί χιλιετίες ο μηχανισμός επεξεργασίας των δεδομένων ήταν και εξακολουθεί να είναι ο ανθρώπινος εγκέφαλος'.",
+      "estimated_seconds": 30
     },
     {
-      "id": "AEPP_CH2_014",
-      "type": "code_analysis",
-      "subtype": "output_prediction",
-      "difficulty": "medium",
-      "points": 2,
-      "tags": [
-        "εκχώρηση"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Τι θα εμφανίσει;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Τι θα εμφανίσει;",
-      "code_block": {
-        "language": "glossa",
-        "content": "Χ <- 4\nΥ <- Χ + 1\nΧ <- Υ + 2\nΕμφάνισε Χ"
-      },
-      "options": null,
-      "correct_answer": {
-        "type": "text",
-        "value": "7"
-      },
-      "explanation": "4 → Υ=5 → Χ=7"
-    },
-    {
-      "id": "AEPP_CH2_015",
-      "type": "code_analysis",
-      "subtype": "output_prediction",
-      "difficulty": "easy",
-      "points": 2,
-      "tags": [
-        "εκχώρηση"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Τι θα εμφανίσει;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Τι θα εμφανίσει;",
-      "code_block": {
-        "language": "glossa",
-        "content": "Α <- 3\nΒ <- 4\nΓ <- Α + Β\nΕμφάνισε Γ"
-      },
-      "options": null,
-      "correct_answer": {
-        "type": "text",
-        "value": "7"
-      },
-      "explanation": "3 + 4 = 7"
-    },
-    {
-      "id": "AEPP_CH2_016",
-      "type": "code_analysis",
-      "subtype": "trace_table",
-      "difficulty": "medium",
-      "points": 3,
-      "tags": [
-        "trace_table"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποια είναι η τελική τιμή της Χ;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποια είναι η τελική τιμή της Χ;",
-      "code_block": {
-        "language": "glossa",
-        "content": "Χ <- 1\nΧ <- Χ + 2\nΧ <- Χ * 3"
-      },
-      "options": null,
-      "correct_answer": {
-        "type": "text",
-        "value": "9"
-      },
-      "explanation": "1 → 3 → 9"
-    },
-    {
-      "id": "AEPP_CH2_017",
-      "type": "code_analysis",
-      "subtype": "trace_table",
-      "difficulty": "medium",
-      "points": 3,
-      "tags": [
-        "trace_table"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποια είναι η τελική τιμή της Α;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποια είναι η τελική τιμή της Α;",
-      "code_block": {
-        "language": "glossa",
-        "content": "Α <- 5\nΑ <- Α - 2\nΑ <- Α + 1"
-      },
-      "options": null,
-      "correct_answer": {
-        "type": "text",
-        "value": "4"
-      },
-      "explanation": "5 → 3 → 4"
-    },
-    {
-      "id": "AEPP_CH2_018",
-      "type": "code_analysis",
-      "subtype": "trace_table",
-      "difficulty": "medium",
-      "points": 3,
-      "tags": [
-        "trace_table"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποια είναι η τελική τιμή της Β;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποια είναι η τελική τιμή της Β;",
-      "code_block": {
-        "language": "glossa",
-        "content": "Α <- 2\nΒ <- Α + 3\nΒ <- Β * 2"
-      },
-      "options": null,
-      "correct_answer": {
-        "type": "text",
-        "value": "10"
-      },
-      "explanation": "2+3=5 → 5*2=10"
-    },
-    {
-      "id": "AEPP_CH2_019",
-      "type": "code_analysis",
-      "subtype": "trace_table",
-      "difficulty": "medium",
-      "points": 3,
-      "tags": [
-        "trace_table"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποια είναι η τελική τιμή της Χ;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποια είναι η τελική τιμή της Χ;",
-      "code_block": {
-        "language": "glossa",
-        "content": "Χ <- 8\nΧ <- Χ / 2\nΧ <- Χ + 1"
-      },
-      "options": null,
-      "correct_answer": {
-        "type": "text",
-        "value": "5"
-      },
-      "explanation": "8 → 4 → 5"
-    },
-    {
-      "id": "AEPP_CH2_020",
-      "type": "code_analysis",
-      "subtype": "trace_table",
-      "difficulty": "easy",
-      "points": 2,
-      "tags": [
-        "trace_table"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποια είναι η τελική τιμή της Ζ;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποια είναι η τελική τιμή της Ζ;",
-      "code_block": {
-        "language": "glossa",
-        "content": "Ζ <- 3\nΖ <- Ζ * Ζ"
-      },
-      "options": null,
-      "correct_answer": {
-        "type": "text",
-        "value": "9"
-      },
-      "explanation": "3 * 3 = 9"
-    },
-    {
-      "id": "AEPP_CH2_021",
+      "id": "AEPP_CH1_016",
       "type": "single_choice",
-      "subtype": null,
       "difficulty": "hard",
       "points": 3,
       "tags": [
-        "λογικό_λάθος",
-        "εκχώρηση"
+        "σαφήνεια",
+        "δεδομένα",
+        "ζητούμενα",
+        "συνδυαστική"
       ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποιο λάθος υπάρχει στον παρακάτω κώδικα;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποιο λάθος υπάρχει στον παρακάτω κώδικα;",
-      "code_block": {
-        "language": "glossa",
-        "content": "Α <- 5\n5 <- Α"
-      },
+      "exam_style": "synduastiki",
+      "learning_objective": "Αναγνώριση σοβαρότερου λάθους σε σύνθετο σενάριο — παράλειψη κατανόησης πριν επίλυση",
+      "common_mistake": "Εστίαση σε δευτερεύοντα λάθη (γλώσσα, διάγραμμα) αντί στο κύριο (παράλειψη κατανόησης).",
+      "cognitive_skill": "kritiki",
+      "scenario": "Σε εξέταση ΑΕΠΠ δίνεται: 'Να υπολογιστεί ο μέσος όρος βαθμολογίας των μαθητών'. Ένας μαθητής διαβάζει το πρόβλημα και ξεκινά αμέσως να γράφει αλγόριθμο.",
+      "question": "Ποιο είναι το πιο σοβαρό λάθος που κάνει ο μαθητής;",
       "options": [
         {
           "id": "A",
-          "text": "Δεν υπάρχει λάθος"
+          "text": "Ξεκινά την επίλυση χωρίς να έχει ολοκληρώσει κατανόηση και καθορισμό δεδομένων/ζητούμενων"
         },
         {
           "id": "B",
-          "text": "Δεν επιτρέπεται αριθμός αριστερά της εκχώρησης"
+          "text": "Χρησιμοποιεί αλγόριθμο αντί για ψευδογλώσσα"
         },
         {
           "id": "C",
-          "text": "Λείπει Εμφάνισε"
+          "text": "Δεν έχει σχεδιάσει διαγραμματική αναπαράσταση πριν ξεκινήσει"
         },
         {
           "id": "D",
-          "text": "Λείπει Διάβασε"
-        }
-      ],
-      "correct_answer": {
-        "type": "option",
-        "value": "B"
-      },
-      "explanation": "Αριστερά της εκχώρησης πρέπει να βρίσκεται μεταβλητή, όχι σταθερά."
-    },
-    {
-      "id": "AEPP_CH2_022",
-      "type": "single_choice",
-      "subtype": null,
-      "difficulty": "medium",
-      "points": 2,
-      "tags": [
-        "εκχώρηση"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποιο είναι το λογικό λάθος;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποιο είναι το λογικό λάθος;",
-      "code_block": {
-        "language": "glossa",
-        "content": "Α <- 5\nΒ <- Α\nΑ <- 10"
-      },
-      "options": [
-        {
-          "id": "A",
-          "text": "Δεν υπάρχει λάθος"
-        },
-        {
-          "id": "B",
-          "text": "Χάνεται η αρχική τιμή της Α"
-        },
-        {
-          "id": "C",
-          "text": "Η Β δεν έχει τιμή"
-        },
-        {
-          "id": "D",
-          "text": "Η εκχώρηση απαγορεύεται"
-        }
-      ],
-      "correct_answer": {
-        "type": "option",
-        "value": "B"
-      },
-      "explanation": "Η αρχική τιμή της Α (5) χάνεται μετά την τελευταία εκχώρηση."
-    },
-    {
-      "id": "AEPP_CH2_023",
-      "type": "single_choice",
-      "subtype": null,
-      "difficulty": "hard",
-      "points": 3,
-      "tags": [
-        "εκχώρηση"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποιο λάθος υπάρχει;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποιο λάθος υπάρχει;",
-      "code_block": {
-        "language": "glossa",
-        "content": "Α = 5"
-      },
-      "options": [
-        {
-          "id": "A",
-          "text": "Χρησιμοποιείται λάθος σύμβολο εκχώρησης"
-        },
-        {
-          "id": "B",
-          "text": "Η Α δεν επιτρέπεται"
-        },
-        {
-          "id": "C",
-          "text": "Το 5 είναι λάθος"
-        },
-        {
-          "id": "D",
-          "text": "Δεν υπάρχει λάθος"
+          "text": "Το πρόβλημα είναι πολύ απλό και δεν χρειάζεται ανάλυση"
         }
       ],
       "correct_answer": {
         "type": "option",
         "value": "A"
       },
-      "explanation": "Στη ΓΛΩΣΣΑ χρησιμοποιείται <- και όχι =."
-    },
-    {
-      "id": "AEPP_CH2_024",
-      "type": "fill_blank",
-      "subtype": null,
-      "difficulty": "easy",
-      "points": 2,
-      "tags": [
-        "εντολές_εισόδου"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Συμπλήρωσε την εντολή εισόδου:\n__________ Α",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Συμπλήρωσε την εντολή εισόδου:\n__________ Α",
-      "code_block": null,
-      "options": null,
-      "correct_answer": {
-        "type": "text",
-        "value": "Διάβασε"
-      },
-      "explanation": "Η εντολή Διάβασε χρησιμοποιείται για ανάγνωση τιμών."
-    },
-    {
-      "id": "AEPP_CH2_025",
-      "type": "fill_blank",
-      "subtype": null,
-      "difficulty": "easy",
-      "points": 2,
-      "tags": [
-        "εντολές_εξόδου"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Συμπλήρωσε την εντολή εξόδου:\n__________ Χ",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Συμπλήρωσε την εντολή εξόδου:\n__________ Χ",
-      "code_block": null,
-      "options": null,
-      "correct_answer": {
-        "type": "text",
-        "value": "Εμφάνισε"
-      },
-      "explanation": "Η εντολή Εμφάνισε χρησιμοποιείται για έξοδο."
-    },
-    {
-      "id": "AEPP_CH2_026",
-      "type": "fill_blank",
-      "subtype": null,
-      "difficulty": "medium",
-      "points": 2,
-      "tags": [
-        "εκχώρηση"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Συμπλήρωσε το σωστό σύμβολο εκχώρησης:\nΑ ___ 5",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Συμπλήρωσε το σωστό σύμβολο εκχώρησης:\nΑ ___ 5",
-      "code_block": null,
-      "options": null,
-      "correct_answer": {
-        "type": "text",
-        "value": "<-"
-      },
-      "explanation": "Το σύμβολο εκχώρησης στη ΓΛΩΣΣΑ είναι <-."
-    },
-    {
-      "id": "AEPP_CH2_027",
-      "type": "single_choice",
-      "subtype": null,
-      "difficulty": "medium",
-      "points": 2,
-      "tags": [
-        "περατότητα"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποιο χαρακτηριστικό αφορά τον τερματισμό;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποιο χαρακτηριστικό αφορά τον τερματισμό;",
-      "code_block": null,
-      "options": [
-        {
-          "id": "A",
-          "text": "Καθοριστικότητα"
-        },
-        {
-          "id": "B",
-          "text": "Περατότητα"
-        },
-        {
-          "id": "C",
-          "text": "Έξοδος"
-        },
-        {
-          "id": "D",
-          "text": "Είσοδος"
-        }
-      ],
-      "correct_answer": {
-        "type": "option",
-        "value": "B"
-      },
-      "explanation": "Η περατότητα απαιτεί ο αλγόριθμος να τερματίζει μετά από πεπερασμένα βήματα."
-    },
-    {
-      "id": "AEPP_CH2_028",
-      "type": "single_choice",
-      "subtype": null,
-      "difficulty": "easy",
-      "points": 1,
-      "tags": [
-        "εντολές_εισόδου"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποια εντολή χρησιμοποιείται για είσοδο δεδομένων;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποια εντολή χρησιμοποιείται για είσοδο δεδομένων;",
-      "code_block": null,
-      "options": [
-        {
-          "id": "A",
-          "text": "Εμφάνισε"
-        },
-        {
-          "id": "B",
-          "text": "Διάβασε"
-        },
-        {
-          "id": "C",
-          "text": "ΑΝ"
-        },
-        {
-          "id": "D",
-          "text": "Τέλος"
-        }
-      ],
-      "correct_answer": {
-        "type": "option",
-        "value": "B"
-      },
-      "explanation": "Η εντολή Διάβασε χρησιμοποιείται για εισαγωγή δεδομένων."
-    },
-    {
-      "id": "AEPP_CH2_029",
-      "type": "true_false",
-      "subtype": null,
-      "difficulty": "medium",
-      "points": 1,
-      "tags": [
-        "είσοδος"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ένας αλγόριθμος μπορεί να μην έχει είσοδο.",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ένας αλγόριθμος μπορεί να μην έχει είσοδο.",
-      "code_block": null,
-      "options": null,
-      "correct_answer": {
-        "type": "boolean",
-        "value": true
-      },
-      "explanation": "Υπάρχουν αλγόριθμοι που δεν χρειάζονται δεδομένα εισόδου."
-    },
-    {
-      "id": "AEPP_CH2_030",
-      "type": "true_false",
-      "subtype": null,
-      "difficulty": "medium",
-      "points": 1,
-      "tags": [
-        "έξοδος"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ένας αλγόριθμος μπορεί να έχει πολλές εξόδους.",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ένας αλγόριθμος μπορεί να έχει πολλές εξόδους.",
-      "code_block": null,
-      "options": null,
-      "correct_answer": {
-        "type": "boolean",
-        "value": true
-      },
-      "explanation": "Ένας αλγόριθμος μπορεί να παράγει πολλαπλά αποτελέσματα."
-    },
-    {
-      "id": "AEPP_CH2_031",
-      "type": "single_choice",
-      "subtype": null,
-      "difficulty": "medium",
-      "points": 2,
-      "tags": [
-        "τύποι_δεδομένων"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποιο από τα παρακάτω αποτελεί αριθμητικό δεδομένο;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποιο από τα παρακάτω αποτελεί αριθμητικό δεδομένο;",
-      "code_block": null,
-      "options": [
-        {
-          "id": "A",
-          "text": "'15'"
-        },
-        {
-          "id": "B",
-          "text": "15"
-        },
-        {
-          "id": "C",
-          "text": "ΑΛΗΘΗΣ"
-        },
-        {
-          "id": "D",
-          "text": "'ΑΕΠΠ'"
-        }
-      ],
-      "correct_answer": {
-        "type": "option",
-        "value": "B"
-      },
-      "explanation": "Οι αριθμητικές τιμές γράφονται χωρίς εισαγωγικά."
-    },
-    {
-      "id": "AEPP_CH2_032",
-      "type": "single_choice",
-      "subtype": null,
-      "difficulty": "medium",
-      "points": 2,
-      "tags": [
-        "τύποι_δεδομένων"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποιο από τα παρακάτω αποτελεί λογικό δεδομένο;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποιο από τα παρακάτω αποτελεί λογικό δεδομένο;",
-      "code_block": null,
-      "options": [
-        {
-          "id": "A",
-          "text": "125"
-        },
-        {
-          "id": "B",
-          "text": "'TRUE'"
-        },
-        {
-          "id": "C",
-          "text": "ΑΛΗΘΗΣ"
-        },
-        {
-          "id": "D",
-          "text": "'15'"
-        }
-      ],
-      "correct_answer": {
-        "type": "option",
-        "value": "C"
-      },
-      "explanation": "Οι λογικές τιμές είναι ΑΛΗΘΗΣ και ΨΕΥΔΗΣ."
-    },
-    {
-      "id": "AEPP_CH2_033",
-      "type": "true_false",
-      "subtype": null,
-      "difficulty": "easy",
-      "points": 1,
-      "tags": [
-        "αναπαράσταση"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Η φυσική γλώσσα μπορεί να χρησιμοποιηθεί για περιγραφή αλγορ",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Η φυσική γλώσσα μπορεί να χρησιμοποιηθεί για περιγραφή αλγορίθμου.",
-      "code_block": null,
-      "options": null,
-      "correct_answer": {
-        "type": "boolean",
-        "value": true
-      },
-      "explanation": "Η φυσική (καθημερινή) γλώσσα είναι αποδεκτός τρόπος περιγραφής."
-    },
-    {
-      "id": "AEPP_CH2_034",
-      "type": "single_choice",
-      "subtype": null,
-      "difficulty": "medium",
-      "points": 2,
-      "tags": [
-        "αναπαράσταση"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Ποια μορφή αναπαράστασης χρησιμοποιεί σύμβολα και βέλη;",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Ποια μορφή αναπαράστασης χρησιμοποιεί σύμβολα και βέλη;",
-      "code_block": null,
-      "options": [
-        {
-          "id": "A",
-          "text": "Ψευδογλώσσα"
-        },
-        {
-          "id": "B",
-          "text": "Διάγραμμα ροής"
-        },
-        {
-          "id": "C",
-          "text": "Φυσική γλώσσα"
-        },
-        {
-          "id": "D",
-          "text": "Μεταβλητές"
-        }
-      ],
-      "correct_answer": {
-        "type": "option",
-        "value": "B"
-      },
-      "explanation": "Το Διάγραμμα Ροής χρησιμοποιεί γεωμετρικά σχήματα και βέλη."
-    },
-    {
-      "id": "AEPP_CH2_035",
-      "type": "true_false",
-      "subtype": null,
-      "difficulty": "medium",
-      "points": 1,
-      "tags": [
-        "αλγόριθμος"
-      ],
-      "exam_style": "Σχολικό",
-      "learning_objective": "Κάθε πρόβλημα επιλύεται αποκλειστικά με έναν μόνο αλγόριθμο.",
-      "common_mistake": null,
-      "cognitive_skill": "ανάκληση",
-      "scenario": null,
-      "question": "Κάθε πρόβλημα επιλύεται αποκλειστικά με έναν μόνο αλγόριθμο.",
-      "code_block": null,
-      "options": null,
-      "correct_answer": {
-        "type": "boolean",
-        "value": false
-      },
-      "explanation": "Ένα πρόβλημα μπορεί να έχει πολλαπλές σωστές αλγοριθμικές λύσεις."
+      "explanation": "Σωστή η Α. Το κρίσιμο λάθος: παράλειψη κατανόησης και καθορισμού απαιτήσεων. Το 'μέσος όρος' φαίνεται απλό, αλλά δεν ορίζει πόσοι μαθητές, ποια μαθήματα, ποιος τύπος μέσου όρου. Η Β είναι παγίδα — το θέμα δεν είναι η γλώσσα. Η Δ είναι επικίνδυνη παρανόηση (παρ. 1.4).",
+      "estimated_seconds": 90
     }
   ]
 }
